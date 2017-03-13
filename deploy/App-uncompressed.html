@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>rallyBurnDown</title>
+
+    <script type="text/javascript" src="/apps/2.0/sdk.js"></script>
+
+    <script type="text/javascript">
+        Rally.onReady(function () {
+                Ext.define('CustomApp', {
+    extend: 'Rally.app.App',
+    componentCls: 'app',
+    items: {html : 'This is html test'},
+    launch: function() {
+        //Write app code here
+        console.log('This is test');
+        //API Docs: https://help.rallydev.com/apps/2.0/doc/
+    }
+});
+
+
+            Rally.launchApp('CustomApp', {
+                name:"rallyBurnDown",
+	            parentRepos:""
+            });
+
+        });
+    </script>
+
+
+
+    <style type="text/css">
+        .app {
+  /* Add app styles here */
+}
+
+    </style>
+</head>
+<body>
+</body>
+</html>
