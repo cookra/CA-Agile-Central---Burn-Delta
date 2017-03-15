@@ -37,15 +37,26 @@
 
                     //chartAggregationType: ''
                 },
-                //chartColors: ["#005eb8", "#8dc63f", "#666666", "#c0c0c0"],
-                chartColors: ["red", "#8dc63f", "#666666", "#c0c0c0"],
+                //chartColors: ["#005eb8", "#6a0b70", "#666666", "#c0c0c0"],
+                //chartColors: ["red", "#8dc63f", "#666666", "#c0c0c0"],
+
+
+
+                chartColors: ["#d61551", "#6a0b70", "grey", "white", "orange"],
+
+                // -> Default chartColors: ["#005eb8", "#8dc63f", "#666666", "#c0c0c0"],
+                cls: 'myCustom',
+                overCls: 'myOver',
 
                 chartConfig: {
                     chart: {
                         zoomType: "xy",
-                        background: 'red',                        
+                        backgroundColor: '#000',
+                        type: 'area',
+                grid: true,
                     },
                     xAxis: {
+                grid: true,
                         categories: [],
                         tickmarkPlacement: "on",
                         tickInterval: 7,
@@ -60,7 +71,15 @@
                             overflow: "justify"
                         }
                     },
-                    yAxis: [],
+
+                    yAxis: [{
+                grid: true,
+                        plotOptions: {
+                            series: {
+                                threshold: 100
+                            }
+                        },
+                    }],
                     tooltip: {
                         formatter: function () {
                             var floatValue = parseFloat(this.y),
@@ -80,7 +99,7 @@
                         series: {
                             type: 'area',
                             marker: {
-                                enabled: false,
+                                enabled: true,
                                 symbol: 'circle',
                                 radius: 3,
                                 states: {

@@ -27,8 +27,10 @@
                 columns: [160, 100],
                 vertical: false,
                 items: [
-                    { boxLabel: "Line", name: this.settingName, inputValue: "line", checked: true },
-                    { boxLabel: "Column", name: this.settingName, inputValue: "column" }
+                    { boxLabel: "Area", name: this.settingName, inputValue: "area", checked: true },
+                    { boxLabel: "Column", name: this.settingName, inputValue: "column" },
+                    { boxLabel: "Line", name: this.settingName, inputValue: "line" },
+                    { boxLabel: "Spline", name: this.settingName, inputValue: "spline" },
                 ],
                 listeners: {
                     beforerender: this.setRadioValue,

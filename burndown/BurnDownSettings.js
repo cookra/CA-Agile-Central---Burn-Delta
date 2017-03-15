@@ -18,6 +18,7 @@
         },
 
         _buildSettingsComponent: function (type, label, name) {
+            console.log(type,label,name);
             var self = this;
 
             var componentAdded = function (cmp) {
