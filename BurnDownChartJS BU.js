@@ -6,18 +6,17 @@
             "Rally.ui.chart.Chart"
         ],
 
-        defaultChartComponentConfig: function () {
+        defaultChartComponentConfig: function() {
             return {
                 xtype: "rallychart",
                 itemId: "burndownchart",
+
                 aggregationErrorMessage: "No data to display. Check the data type setting for displaying data based on count versus plan estimate.",
 
                 storeType: "Rally.data.lookback.SnapshotStore",
                 storeConfig: {
                     find: {
-                        "_TypeHierarchy": {
-                            '$in': [-51038, -51006]
-                        },
+                        "_TypeHierarchy": { '$in' : [ -51038, -51006 ] },
                         "Children": null
                     },
                     fetch: ["ScheduleState", "PlanEstimate", "ObjectId", "_ValidFrom", "_ValidTo"],
@@ -38,12 +37,11 @@
                     //chartAggregationType: ''
                 },
                 //chartColors: ["#005eb8", "#8dc63f", "#666666", "#c0c0c0"],
-                chartColors: ["red", "#8dc63f", "#666666", "#c0c0c0"],
+                chartColors: ["#005eb8", "#8dc63f", "#666666", "#c0c0c0"],
 
                 chartConfig: {
                     chart: {
-                        zoomType: "xy",
-                        background: 'red',                        
+                        zoomType: "xy"
                     },
                     xAxis: {
                         categories: [],
@@ -74,23 +72,14 @@
                         }
                     },
                     plotOptions: {
-                        areaSpline: {
-                            fillOpacity: 0.5,
-                        },
                         series: {
-                            type: 'area',
                             marker: {
                                 enabled: false,
-                                symbol: 'circle',
-                                radius: 3,
                                 states: {
                                     hover: {
                                         enabled: true
                                     }
                                 }
-                            },
-                            area: {
-                                stacking: 'normal'
                             },
                             connectNulls: true
                         },
