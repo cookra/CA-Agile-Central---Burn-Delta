@@ -44,14 +44,14 @@
 
                 //chartColors: ["#d61551", "#6a0b70", "grey", "white", "orange"],
 
-                 chartColors: ["#005eb8", "#8dc63f", "#666666", "#c0c0c0"],
+                 chartColors: ["#7cc6f4", "#dee255", "#666666", "#c0c0c0"],
                 cls: 'myCustom',
                 overCls: 'myOver',
 
                 chartConfig: {
                     chart: {
                         zoomType: "xy",
-                        backgroundColor: '#fff',
+                        backgroundColor: '#ebe7e4',
                         type: 'area',
                 grid: true,
                     },

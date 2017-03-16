@@ -61,8 +61,111 @@
                 this._rebuildChartForScope(scope.getRecord().get('_ref'));
             }
         },
+        _buildLayout: function () {
+            var xData1 = this.getContext().getUser();
+            var xData2 = this.getContext().getProject();
+            var xData3 = this.getContext().getWorkspace();
+            var appVersion = Ext.create('App.System')._this_Application_Details('inapp');
+            var myColours_Barclays = Ext.create('App.Config').PbarclaysColours_5
+            var myColours_MyColours = Ext.create('App.Config').PmyColours
+
+
+            //PmyColours: ["#d61551", "#c9506f", "#6a0b70", "#0e1026", "#e53118", "#262428", "#c9d940", "#d3272b", "#ea2b30", "#59595b", "#242021", "#ebe7e4", "#cbc9c7"],
+            //PbarclaysColours_5: ['#145FAC', '#437EA0', '#00AEEF', '#FFF', '#FFA000'],
+            /*Orange */
+            var tabColour_1 = myColours_MyColours[11];
+            var tabColour_2 = myColours_MyColours[11];
+            var tabColour_3 = myColours_MyColours[11];
+            var panelBaseColor = myColours_MyColours[11];
+            var bodyStyle = 'font-size:15px;padding:10px; color:' + myColours_MyColours[3] + ';';
+
+            /* Green
+             var tabColour_1 = myColours_MyColours[6];
+            var tabColour_2 = myColours_MyColours[6];
+            var tabColour_3 = myColours_MyColours[6];
+            var panelBaseColor = myColours_MyColours[5];
+                        var bodyStyle = 'font-size:20px;padding:10px; color:' + myColours_Barclays[3] + ';';
+
+            */
+
+            var colour_Background_Darken = Ext.create('App.Tools')._shadeBlendConvert(panelBaseColor, 40);
+            var colour_Background = 'background: repeating-linear-gradient(  45deg,  ' + panelBaseColor + ',' + panelBaseColor + ' 10px,  ' + colour_Background_Darken + ' 10px,  ' + colour_Background_Darken + ' 20px);';
+
+            var container = Ext.create('Ext.container.Container', {
+
+                xtype: 'Viewport',
+                items: [{
+                    region: 'north',
+                    collapsible: true,
+                    items: [{
+                        xtype: 'tabpanel',
+                        width: '100%',
+                        items: [{
+                            title: 'About',
+                            width: '100%',
+                            html: 'This custom page display artifacts that are considered to be orphaned',
+                            height: 50,
+                            bodyStyle: colour_Background + bodyStyle,
+                            cls: 'fixTabMargins',
+                            tabConfig: {
+                                style: {
+                                    background: tabColour_1,
+                                }
+                            },
+                            /*
+                            buttons: [{
+                                text: 'Button 1'
+                            }]
+                            */
+                        }, {
+                            title: 'Version',
+                            width: '100%',
+                            html: appVersion[2] + ' ' + appVersion[4] + ' ' + appVersion[3] + ' ' + appVersion[6],
+                            height: 50,
+                            bodyStyle: colour_Background + bodyStyle,
+                            cls: 'fixTabMargins',
+                            tabConfig: {
+                                style: {
+                                    background: tabColour_2,
+                                }
+                            },
+                        }, {
+                            title: 'Support',
+                            width: '100%',
+                            height: 50,
+                            bodyStyle: colour_Background + bodyStyle,
+                            cls: 'fixTabMargins',
+                            tabConfig: {
+                                style: {
+                                    background: tabColour_3,
+                                }
+                            },
+                            items: [{
+                                xtype: 'button',
+                                text: 'Support',
+                                height: 25,
+                                style: {
+                                    backgroundColor: 'red',
+                                },
+                                listeners: {
+                                    afterrender: function (v) {
+                                        v.el.on('click', function () {
+                                            Ext.create('App.Emailer')._emailer(xData1, xData2, xData3);
+                                        });
+                                    },
+                                    scope: this
+                                },
+                            }]
+                        }]
+                    }]
+                }]
+            });
+            this.add(container);
+            //this._mask();
+        },
 
         launch: function () {
+            this._buildLayout();
             if (this._settingsInvalid()) {
                 this.fireEvent('settingsneeded', this);
                 return;

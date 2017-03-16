@@ -1,0 +1,25 @@
+.app {
+     /* Add app styles here */
+}
+
+.fixTabMargins {
+    margin:0;
+    padding:0;
+}
+.x-tab-bar {
+    background-color: white;
+    border: none;
+}
+.x-panel-default {
+    border: none;
+}
+.x-panel-body-default {
+    border: none;
+}
+.x-tab-bar .x-tab-default .x-tab-inner {
+    color: black;
+}
+.x-tab-bar .x-tab-active .x-tab-inner {
+    color: black;
+    text-decoration: underline;
+}

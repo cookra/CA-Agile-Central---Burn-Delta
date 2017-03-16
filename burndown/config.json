@@ -11,6 +11,13 @@
         "../settings/SettingsChangeMixin.js",
         "../settings/DataTypePicker.js",
         "../settings/TimeboxPicker.js",
+        "../app/Config.js",
+        "../app/Emailer.js",
+        "../app/Layout.js",
+        "../app/Loader.js",
+        "../app/System.js",
+        "../app/Loading.js",
+        "../app/Tools.js",
         "BurnDownSettings.js",
         "BurnDownChart.js",
         "BurnDownApp.js",
@@ -18,6 +25,7 @@
         "ReleaseBurnDownApp.js"
     ],
     "css": [
-        "../Charts.less"
+        "../Charts.less",
+        "../App.css"
     ]
 }
