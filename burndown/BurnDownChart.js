@@ -42,21 +42,20 @@
 
 
 
-                chartColors: ["#d61551", "#6a0b70", "grey", "white", "orange"],
+                //chartColors: ["#d61551", "#6a0b70", "grey", "white", "orange"],
 
-                // -> Default chartColors: ["#005eb8", "#8dc63f", "#666666", "#c0c0c0"],
+                 chartColors: ["#005eb8", "#8dc63f", "#666666", "#c0c0c0"],
                 cls: 'myCustom',
                 overCls: 'myOver',
 
                 chartConfig: {
                     chart: {
                         zoomType: "xy",
-                        backgroundColor: '#000',
+                        backgroundColor: '#fff',
                         type: 'area',
                 grid: true,
                     },
                     xAxis: {
-                grid: true,
                         categories: [],
                         tickmarkPlacement: "on",
                         tickInterval: 7,
@@ -73,10 +72,9 @@
                     },
 
                     yAxis: [{
-                grid: true,
                         plotOptions: {
                             series: {
-                                threshold: 100
+                                threshold: 0,
                             }
                         },
                     }],
@@ -93,11 +91,7 @@
                         }
                     },
                     plotOptions: {
-                        areaSpline: {
-                            fillOpacity: 0.5,
-                        },
                         series: {
-                            type: 'area',
                             marker: {
                                 enabled: true,
                                 symbol: 'circle',

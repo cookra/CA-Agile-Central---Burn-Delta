@@ -30,7 +30,7 @@
                 vertical: false,
                 items: [
                     { boxLabel: "Release", name: this.settingName, inputValue: "release", checked: true },
-                    { boxLabel: "Iteration", name: this.settingName, inputValue: "iteration" }
+                    //{ boxLabel: "Iteration", name: this.settingName, inputValue: "iteration" }
                 ],
                 listeners: {
                     beforerender: this.setRadioValue,

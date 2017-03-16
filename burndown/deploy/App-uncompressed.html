@@ -245,10 +245,10 @@
                 columns: [160, 100],
                 vertical: false,
                 items: [
-                    { boxLabel: "Area", name: this.settingName, inputValue: "area", checked: true },
+                    { boxLabel: "Area", name: this.settingName, inputValue: "area"},
                     { boxLabel: "Column", name: this.settingName, inputValue: "column" },
                     { boxLabel: "Line", name: this.settingName, inputValue: "line" },
-                    { boxLabel: "Spline", name: this.settingName, inputValue: "spline" },
+                    { boxLabel: "Spline", name: this.settingName, inputValue: "spline", checked: true  },
                 ],
                 listeners: {
                     beforerender: this.setRadioValue,
@@ -351,7 +351,7 @@
                 vertical: false,
                 items: [
                     { boxLabel: "Release", name: this.settingName, inputValue: "release", checked: true },
-                    { boxLabel: "Iteration", name: this.settingName, inputValue: "iteration" }
+                    //{ boxLabel: "Iteration", name: this.settingName, inputValue: "iteration" }
                 ],
                 listeners: {
                     beforerender: this.setRadioValue,
@@ -471,21 +471,20 @@
 
 
 
-                chartColors: ["#d61551", "#6a0b70", "grey", "white", "orange"],
+                //chartColors: ["#d61551", "#6a0b70", "grey", "white", "orange"],
 
-                // -> Default chartColors: ["#005eb8", "#8dc63f", "#666666", "#c0c0c0"],
+                 chartColors: ["#005eb8", "#8dc63f", "#666666", "#c0c0c0"],
                 cls: 'myCustom',
                 overCls: 'myOver',
 
                 chartConfig: {
                     chart: {
                         zoomType: "xy",
-                        backgroundColor: '#000',
+                        backgroundColor: '#fff',
                         type: 'area',
                 grid: true,
                     },
                     xAxis: {
-                grid: true,
                         categories: [],
                         tickmarkPlacement: "on",
                         tickInterval: 7,
@@ -502,10 +501,9 @@
                     },
 
                     yAxis: [{
-                grid: true,
                         plotOptions: {
                             series: {
-                                threshold: 100
+                                threshold: 0,
                             }
                         },
                     }],
@@ -522,11 +520,7 @@
                         }
                     },
                     plotOptions: {
-                        areaSpline: {
-                            fillOpacity: 0.5,
-                        },
                         series: {
-                            type: 'area',
                             marker: {
                                 enabled: true,
                                 symbol: 'circle',
@@ -1074,7 +1068,7 @@
             if (aggregationType === 'storycount') {
                 return 'Count';
             } else {
-                return 'Points';
+                return 'Plan Estimate';
             }
         },
 
@@ -1140,7 +1134,7 @@
             }
 
             return {
-                text: title,
+                text: title+' Burn Delta',
                 align: align,
                 margin: 30
             };

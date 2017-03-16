@@ -22,13 +22,11 @@
 
         cls: 'burndown-app',
 
-        items: [
-            {
-                xtype: 'container',
-                itemId: 'header',
-                cls: 'header'
-            }
-        ],
+        items: [{
+            xtype: 'container',
+            itemId: 'header',
+            cls: 'header'
+        }],
 
         help: {
             id: 278
@@ -72,7 +70,7 @@
             this.customScheduleStates = null;
             this.chartComponentConfig = Ext.create('Rally.apps.charts.burndown.BurnDownChart', this).defaultChartComponentConfig();
 
-            Ext.create('Rally.apps.charts.IntegrationHeaders',this).applyTo(this.chartComponentConfig.storeConfig);
+            Ext.create('Rally.apps.charts.IntegrationHeaders', this).applyTo(this.chartComponentConfig.storeConfig);
 
             this._addHelpComponent();
             this._loadUserStoryModel();
@@ -81,7 +79,9 @@
 
             if (!this.isOnScopedDashboard()) {
                 this.ignoreOnScopeChange = true;
-                this._getScopePicker().on('ready', this._loadScopePreference, this, {single: true});
+                this._getScopePicker().on('ready', this._loadScopePreference, this, {
+                    single: true
+                });
             }
         },
 
@@ -98,7 +98,7 @@
             });
         },
 
-        _rebuildChartForScope: function(scopeRef) {
+        _rebuildChartForScope: function (scopeRef) {
             this._destroyChart();
 
             this._saveScopePreference(scopeRef);
@@ -152,11 +152,10 @@
             this._getScopePicker().setValue(scopeRef);
         },
 
-        _loadTimeboxes: function() {
+        _loadTimeboxes: function () {
             Ext.create('Rally.data.wsapi.Store', {
                 model: this.scopeObject._type,
-                filters: [
-                    {
+                filters: [{
                         property: 'Name',
                         operator: '=',
                         value: this.scopeObject.Name
@@ -200,7 +199,7 @@
             if (this._getScopeType() === 'release') {
                 this._fetchIterations();
             } else {
-                if ( this.customScheduleStates === null) { // wait until we get the schedule states
+                if (this.customScheduleStates === null) { // wait until we get the schedule states
                     this.deferredAddChart = this._addChart;
                 } else {
                     this._addChart();
@@ -224,7 +223,9 @@
             for (i = 0; i < this.timeboxes.length; i++) {
                 oids.push(this.timeboxes[i].ObjectID);
             }
-            storeConfig.find[type] = { '$in' : oids };
+            storeConfig.find[type] = {
+                '$in': oids
+            };
 
             this._renderChartBasedOnType();
 
@@ -238,7 +239,7 @@
         _onIterationsLoaded: function (store) {
             this.iterations = store.getItems();
 
-            if ( this.customScheduleStates === null) {
+            if (this.customScheduleStates === null) {
                 this.deferredAddChart = this._addChartWithIterationLines;
             } else {
                 this._addChartWithIterationLines();
@@ -254,7 +255,7 @@
 
         },
 
-        _getNow: function() {
+        _getNow: function () {
             return new Date();
         },
 
@@ -263,7 +264,7 @@
             var endDate = this._getScopeObjectEndDate();
             var now = this._getNow();
             calcConfig.startDate = Rally.util.DateTime.toIsoString(this._getScopeObjectStartDate(), true);
-            if(now > this._getScopeObjectStartDate() && now < this._getScopeObjectEndDate()) {
+            if (now > this._getScopeObjectStartDate() && now < this._getScopeObjectEndDate()) {
                 endDate = now;
             }
             calcConfig.endDate = Rally.util.DateTime.toIsoString(endDate, true);
@@ -295,9 +296,9 @@
                     workspace: this.getContext().getWorkspaceRef(),
                     project: null
                 },
-                success: function(model) {
+                success: function (model) {
                     model.load(Rally.util.Ref.getOidFromRef(scopeRef), {
-                        success: function(record) {
+                        success: function (record) {
                             this._onScopeObjectLoaded(record);
                         },
                         scope: this
@@ -310,8 +311,7 @@
         _fetchIterations: function () {
             var store = Ext.create('Rally.data.wsapi.Store', {
                 model: Ext.identityFn('Iteration'),
-                filters: [
-                    {
+                filters: [{
                         property: 'StartDate',
                         operator: '>=',
                         value: Rally.util.DateTime.toIsoString(this._getScopeObjectStartDate(), true)
@@ -326,7 +326,7 @@
                     workspace: this.getContext().getWorkspaceRef(),
                     project: this.getContext().getProjectRef()
                 },
-                fetch: ['Name','StartDate','EndDate'],
+                fetch: ['Name', 'StartDate', 'EndDate'],
                 limit: Infinity
             });
 
@@ -336,8 +336,8 @@
 
         _areIterationsEqual: function (iteration1, iteration2) {
             return iteration1.Name === iteration2.Name &&
-                   iteration1.StartDate === iteration2.StartDate &&
-                   iteration1.EndDate === iteration2.EndDate;
+                iteration1.StartDate === iteration2.StartDate &&
+                iteration1.EndDate === iteration2.EndDate;
         },
 
         _addIterationLines: function (chart) {
@@ -353,12 +353,12 @@
             for (i = 0; i < this.iterations.length; i++) {
                 unique = true;
                 for (j = 0; j < uniqueIterations.length; j++) {
-                    if(this._areIterationsEqual(uniqueIterations[j], this.iterations[i])) {
+                    if (this._areIterationsEqual(uniqueIterations[j], this.iterations[i])) {
                         unique = false;
                         break;
                     }
                 }
-                if(unique === true) {
+                if (unique === true) {
                     uniqueIterations.push(this.iterations[i]);
                 }
             }
@@ -372,7 +372,7 @@
                 axis.plotLines.push(this._getPlotLine(categories, uniqueIterations[uniqueIterations.length - 1], true));
             }
         },
-        _buildLabelText: function(iteration) {
+        _buildLabelText: function (iteration) {
             var labelSetting = this.getSetting("showLabels");
 
             var text = '';
@@ -386,11 +386,11 @@
             var startDate = this.dateStringToObject(iteration.StartDate);
             var endDate = this.dateStringToObject(iteration.EndDate);
 
-            var label =   {
-                    text: this._buildLabelText( iteration ),
-                    align: 'center',
-                    rotation: 0,
-                    y: -7
+            var label = {
+                text: this._buildLabelText(iteration),
+                align: 'center',
+                rotation: 0,
+                y: -7
             };
 
             return {
@@ -402,12 +402,12 @@
             };
         },
 
-        _getNearestWorkday: function(categories, date) {
+        _getNearestWorkday: function (categories, date) {
             var dateStr = Ext.Date.format(date, 'Y-m-d');
             var index = categories.indexOf(dateStr);
-            if(index === -1) {
+            if (index === -1) {
                 var workdays = this._getWorkspaceConfiguredWorkdays();
-                if(workdays.length < 1) {
+                if (workdays.length < 1) {
                     return -1;
                 }
                 // date not in categories (probably) means it falls on a non-workday...back up to the next previous workday
@@ -451,6 +451,8 @@
             this.down('rallychart').on('snapshotsAggregated', this._onSnapshotDataReady, this);
         },
 
+
+
         _onSnapshotDataReady: function (chart) {
             this._updateDisplayType(chart);
             this._updateXAxis(chart);
@@ -479,9 +481,7 @@
 
         _updateYAxisTitle: function () {
             var chartConfig = this.chartComponentConfig.chartConfig;
-            chartConfig.yAxis = [
-                {}
-            ];
+            chartConfig.yAxis = [{}];
             chartConfig.yAxis[0].title = {
                 text: this._getAxisTitleBasedOnAggregationType()
             };
@@ -497,10 +497,10 @@
         },
 
         _updateXAxis: function (chart) {
-            if(this.container.dom.offsetWidth < 1000) {
+            if (this.container.dom.offsetWidth < 1000) {
                 chart.chartConfig.xAxis.labels.staggerLines = 2;
             }
-            chart.chartConfig.xAxis.labels.step = Math.round( chart.chartData.categories.length / 100 );
+            chart.chartConfig.xAxis.labels.step = Math.round(chart.chartData.categories.length / 100);
             chart.chartConfig.xAxis.tickInterval = this._configureChartTicks(chart.chartData.categories.length);
         },
 
@@ -517,7 +517,7 @@
             if (aggregationType === 'storycount') {
                 return 'Count';
             } else {
-                return 'Points';
+                return 'Plan Estimate';
             }
         },
 
@@ -583,7 +583,7 @@
             }
 
             return {
-                text: title,
+                text: title + ' Burn Delta',
                 align: align,
                 margin: 30
             };
@@ -692,18 +692,18 @@
             }
         },
 
-        _loadUserStoryModel: function() {
+        _loadUserStoryModel: function () {
             Rally.data.ModelFactory.getModel({
                 type: "UserStory",
                 context: this._getContext(),
-                success: function(model) {
+                success: function (model) {
                     this._getScheduleStateValues(model);
                 },
                 scope: this
             });
         },
 
-        _getContext: function() {
+        _getContext: function () {
             return {
                 workspace: this.context.getWorkspaceRef(),
                 project: null
