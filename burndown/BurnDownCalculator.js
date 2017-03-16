@@ -41,6 +41,21 @@
 
                         return 0;
                     }
+                },
+                {
+                    "as": "CompletedPoints",
+                    "f": function (snapshot) {
+                        var ss = snapshot.ScheduleState;
+                        if (completedStates.indexOf(ss) > -1) {
+                            if (aggregationType === "storycount") {
+                                return 1;
+                            } else if (snapshot.PlanEstimate) {
+                                return snapshot.PlanEstimate;
+                            }
+                        }
+
+                        return 0;
+                    }
                 }
             ];
         },
@@ -55,6 +70,11 @@
                 {
                     "field": "AcceptedPoints",
                     "as": "Accepted",
+                    "f": "sum"
+                },
+                {
+                    "field": "CompletedPoints",
+                    "as": "Completed",
                     "f": "sum"
                 }
             ];
@@ -91,7 +111,8 @@
                         incrementAmount = max / increments;
                         return Math.floor(100 * (max - index * incrementAmount)) / 100;
                     },
-                    "display": "line"
+                    "display": "line",
+                    "dashStyle": "Dash"
                 },
                 {
                     "as": "Prediction",

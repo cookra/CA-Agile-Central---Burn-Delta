@@ -29,8 +29,8 @@
                 columns: [160, 100, 100],
                 vertical: false,
                 items: [
-                    { boxLabel: "Release", name: this.settingName, inputValue: "release", checked: true },
-                    //{ boxLabel: "Iteration", name: this.settingName, inputValue: "iteration" }
+                    //{ boxLabel: "Release", name: this.settingName, inputValue: "release", checked: true },
+                    { boxLabel: "Iteration", name: this.settingName, inputValue: "iteration", checked: true }
                 ],
                 listeners: {
                     beforerender: this.setRadioValue,

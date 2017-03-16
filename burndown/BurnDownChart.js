@@ -37,14 +37,7 @@
 
                     //chartAggregationType: ''
                 },
-                //chartColors: ["#005eb8", "#6a0b70", "#666666", "#c0c0c0"],
-                //chartColors: ["red", "#8dc63f", "#666666", "#c0c0c0"],
-
-
-
-                //chartColors: ["#d61551", "#6a0b70", "grey", "white", "orange"],
-
-                 chartColors: ["#7cc6f4", "#dee255", "#666666", "#c0c0c0"],
+                chartColors: ["#7cc6f4", "#dee255", "#666666", "#c0c0c0"],
                 cls: 'myCustom',
                 overCls: 'myOver',
 
@@ -53,7 +46,7 @@
                         zoomType: "xy",
                         backgroundColor: '#ebe7e4',
                         type: 'area',
-                grid: true,
+                        grid: true,
                     },
                     xAxis: {
                         categories: [],

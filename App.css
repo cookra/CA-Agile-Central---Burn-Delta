@@ -5,6 +5,7 @@
 .fixTabMargins {
     margin:0;
     padding:0;
+    height:200px
 }
 .x-tab-bar {
     background-color: white;
