@@ -1827,8 +1827,8 @@
                     'f': function(seriesData) {
                             var max = 0, i = 0;
                             for (i=0;i<seriesData.length;i++) {
-                                if(seriesData[i].Accepted + seriesData[i]['To Do'] > max) {
-                                    max = seriesData[i].Accepted + seriesData[i]['To Do'];
+                                if(seriesData[i].Completed + seriesData[i]['To Do'] > max) {
+                                    max = seriesData[i].Completed + seriesData[i]['To Do'];
                                 }
                             }
                             return max;
