@@ -15,7 +15,6 @@
             'Rally.apps.charts.IntegrationHeaders',
             'Rally.apps.charts.burndown.BurnDownChart'
         ],
-
         mixins: [
             'Rally.apps.charts.DateMixin'
         ],
@@ -31,7 +30,7 @@
 
         scopeObject: undefined,
 
-        customScheduleStates: null, // defaults hide problems
+        customScheduleStates: true, // defaults hide problems
 
         config: {
             defaultSettings: {

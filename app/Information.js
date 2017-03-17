@@ -28,27 +28,27 @@ Ext.define('App.Information', {
     _writePanelContent: function (t) {
         if (t === 'about') {
             var o = '<div class="divTable">' +
-                '<div class="divTableBody">' +
-                '<div class="divTableRowHeader">' +
-                '<div class="divTableCellHeader_stretched" ' + this._divFormater(0, 1) + '>About</div>' +
-                '<div class="divSpacer">&nbsp;</div>' +
-                '<div class="divTableCellHeader" ' + this._divFormater(0, 1) + '>Configuration</div>' +
-                '<div class="divSpacer">&nbsp;</div>' +
-                '<div class="divTableCellHeader" ' + this._divFormater(0, 1) + '">Data Types</div>' +
-                '<div class="divSpacer">&nbsp;</div>' +
-                '<div class="divTableCellHeader" ' + this._divFormater(0, 1) + '>Chart Type</div>' +
-                '</div>' +
-                '<div class="divTableRowContent">' +
-                '<div class="divTableCellContent_stretched" ' + this._divFormater(1, 0) + '>Displays the Burn delta between remaining and accepted user stories</div>' +
-                '<div class="divSpacer">&nbsp;</div>' +
-                '<div class="divTableCellContent" ' + this._divFormater(1, 0) + '>&nbsp;</div>' +
-                '<div class="divSpacer">&nbsp;</div>' +
-                '<div class="divTableCellContent" ' + this._divFormater(1, 0) + '><ol><li>Planned Estimate</li><li>User Story Count</li></ol></div>' +
-                '<div class="divSpacer">&nbsp;</div>' +
-                '<div class="divTableCellContent" ' + this._divFormater(1, 0) + '><ol><li>Area</li><li>Column</li><li>Line</li><li>Split</li></ol></div>' +
-                '</div>' +
-                '</div>' +
-                '</div>';
+                        '<div class="divTableBody">' +
+                            '<div class="divTableRowHeader">' +
+                                '<div class="divTableCellHeader_stretched" ' + this._divFormater(0, 1) + '>About</div>' +
+                                '<div class="divSpacer">&nbsp;</div>' +
+                                '<div class="divTableCellHeader" ' + this._divFormater(0, 1) + '>Configuration</div>' +
+                                '<div class="divSpacer">&nbsp;</div>' +
+                                '<div class="divTableCellHeader" ' + this._divFormater(0, 1) + '">Data Types</div>' +
+                                '<div class="divSpacer">&nbsp;</div>' +
+                                '<div class="divTableCellHeader" ' + this._divFormater(0, 1) + '>Chart Type</div>' +
+                            '</div>' +
+                            '<div class="divTableRowContent">' +
+                                '<div class="divTableCellContent_stretched" ' + this._divFormater(1, 0) + '>Displays the Burn delta between remaining and accepted user stories</div>' +
+                                '<div class="divSpacer">&nbsp;</div>' +
+                                '<div class="divTableCellContent" ' + this._divFormater(1, 0) + '>&nbsp;</div>' +
+                                '<div class="divSpacer">&nbsp;</div>' +
+                                '<div class="divTableCellContent" ' + this._divFormater(1, 0) + '><ol><li>Planned Estimate</li><li>User Story Count</li></ol></div>' +
+                                '<div class="divSpacer">&nbsp;</div>' +
+                                '<div class="divTableCellContent" ' + this._divFormater(1, 0) + '><ol><li>Area</li><li>Column</li><li>Line</li><li>Split</li></ol></div>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>';
             return o;
         }
     },
