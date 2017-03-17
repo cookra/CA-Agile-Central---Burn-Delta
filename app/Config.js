@@ -1,6 +1,6 @@
 Ext.define('App.Config', {
     config: {
-        // Versioning
+        // Versioning //
         Pversion: 'v1.9b',
         PappID: 'AC Burn Delta',
         Powner: 'Richard Cook',
