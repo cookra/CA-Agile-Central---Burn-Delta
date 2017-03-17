@@ -18,6 +18,7 @@
         "../app/System.js",
         "../app/Loading.js",
         "../app/Tools.js",
+        "../app/Information.js",
         "BurnDownSettings.js",
         "BurnDownChart.js",
         "BurnDownApp.js",

@@ -58,133 +58,6 @@
                 this._rebuildChartForScope(scope.getRecord().get('_ref'));
             }
         },
-        _buildLayout: function () {
-            var h_panel = 140;
-            var h_button = 25;
-            var p_panel = 10;
-            var f_panel_font_size = 15;
-            var colour_Shade_Percent = -5;
-
-            var xData1 = this.getContext().getUser();
-            var xData2 = this.getContext().getProject();
-            var xData3 = this.getContext().getWorkspace();
-            var appVersion = Ext.create('App.System')._this_Application_Details('inapp');
-            var myColours_Barclays = Ext.create('App.Config').PbarclaysColours_5;
-            var myColours_MyColours = Ext.create('App.Config').PmyColours;
-
-            var about___Text = Ext.create('App.Config').Pabout;
-            var version_Text = Ext.create('App.Config')._generate_Version();
-            var usage___Text = Ext.create('App.Config').Pusage;
-            var support___Text = Ext.create('App.Config').Psupport
-
-            /* Colour Reference from Config Arrays
-            PmyColours: ["#d61551", "#c9506f", "#6a0b70", "#0e1026", "#e53118", "#262428", "#c9d940", "#d3272b", "#ea2b30", "#59595b", "#242021", "#ebe7e4", "#cbc9c7"],
-            PbarclaysColours_5: ['#145FAC', '#437EA0', '#00AEEF', '#FFF', '#FFA000'],
-            */
-            /* ACTIVE THEME -> Orange */
-            var tabColour_1 = myColours_MyColours[11];
-            var tabColour_2 = myColours_MyColours[11];
-            var tabColour_3 = myColours_MyColours[11];
-            var panelBaseColor = myColours_MyColours[11];
-            var bodyStyle = 'font-size:' + f_panel_font_size + 'px;padding:' + p_panel + 'px; color:' + myColours_MyColours[3] + ';';
-
-            /* Green 
-             var tabColour_1 = myColours_MyColours[6];
-            var tabColour_2 = myColours_MyColours[6];
-            var tabColour_3 = myColours_MyColours[6];
-            var panelBaseColor = myColours_MyColours[5];
-            var bodyStyle = 'font-size:20px;padding:10px; color:' + myColours_Barclays[3] + ';';
-
-            */
-            var colour_Background_Darken = Ext.create('App.Tools')._shadeBlendConvert(panelBaseColor, colour_Shade_Percent);
-            var colour_Background = 'background: repeating-linear-gradient(  45deg,  ' + panelBaseColor + ',' + panelBaseColor + ' 10px,  ' + colour_Background_Darken + ' 10px,  ' + colour_Background_Darken + ' 20px);';
-            // Build Details Container
-            var container = Ext.create('Ext.container.Container', {
-                xtype: 'Viewport',
-                items: [{
-                    region: 'north',
-                    collapsible: true,
-                    items: [{
-                        xtype: 'tabpanel',
-                        collapsed: true,
-                        width: '100%',
-                        items: [{
-                            title: 'About',
-                            width: '100%',
-                            html: about___Text,
-                            height: h_panel,
-                            bodyStyle: colour_Background + bodyStyle,
-                            cls: 'fixTabMargins',
-                            tabConfig: {
-                                style: {
-                                    background: tabColour_1,
-                                }
-                            },
-                            /*
-                            buttons: [{
-                                text: 'Button 1'
-                            }]
-                            */
-                        }, {
-                            title: 'Usage',
-                            width: '100%',
-                            html: usage___Text,
-                            height: h_panel,
-                            bodyStyle: colour_Background + bodyStyle,
-                            cls: 'fixTabMargins',
-                            tabConfig: {
-                                style: {
-                                    background: tabColour_2,
-                                }
-                            },
-                        }, {
-                            title: 'Version',
-                            width: '100%',
-                            html: version_Text,
-                            height: h_panel,
-                            bodyStyle: colour_Background + bodyStyle,
-                            cls: 'fixTabMargins',
-                            tabConfig: {
-                                style: {
-                                    background: tabColour_2,
-                                }
-                            },
-                        }, {
-                            title: 'Support',
-                            width: '100%',
-                            html: support___Text,
-                            height: h_panel,
-                            bodyStyle: colour_Background + bodyStyle,
-                            cls: 'fixTabMargins',
-                            tabConfig: {
-                                style: {
-                                    background: tabColour_3,
-                                }
-                            },
-                            items: [{
-                                xtype: 'button',
-                                text: 'Contact Support',
-                                height: h_button,
-                                style: {
-                                    backgroundColor: 'red',
-                                },
-                                listeners: {
-                                    afterrender: function (v) {
-                                        v.el.on('click', function () {
-                                            Ext.create('App.Emailer')._emailer(xData1, xData2, xData3);
-                                        });
-                                    },
-                                    scope: this
-                                },
-                            }]
-                        }]
-                    }]
-                }]
-            });
-            this.add(container);
-            //this._mask();
-        },
-
         launch: function () {
             this._buildLayout();
             if (this._settingsInvalid()) {
@@ -208,11 +81,12 @@
                 });
             }
         },
-
-        _addHelpComponent: function () {
-            this.down('#header').add(this._buildHelpComponent());
+        _buildLayout: function () {
+            this.add(Ext.create('App.Information')._generate_Tabs());
         },
-
+        _addHelpComponent: function () {
+            //this.down('#header').add(this._buildHelpComponent());
+        },
         _buildHelpComponent: function () {
             return Ext.create('Ext.Component', {
                 renderTpl: Rally.util.Help.getIcon({

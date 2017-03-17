@@ -1,26 +1,126 @@
 .app {
-     /* Add app styles here */
+    /* Add app styles here */
 }
 
 .fixTabMargins {
-    margin:0;
-    padding:0;
-    height:200px
+    margin: 0;
+    padding: 0;
+    height: 200px
 }
+
 .x-tab-bar {
     background-color: white;
     border: none;
 }
+
 .x-panel-default {
     border: none;
 }
+
 .x-panel-body-default {
     border: none;
 }
+
 .x-tab-bar .x-tab-default .x-tab-inner {
     color: black;
 }
+
 .x-tab-bar .x-tab-active .x-tab-inner {
     color: black;
     text-decoration: underline;
+}
+
+h2 {
+    margin: 0px;
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: Gill Sans Extrabold, sans-serif;
+}
+
+h3 {
+    margin: 0px;
+    color: #666;
+    font-size: 16px;
+    font-weight: normal;
+    font-family: Gill Sans Extrabold, sans-serif;
+}
+
+p {
+    margin: 0px;
+    color: #555;
+    font-size: 20px;
+    font-weight: normal;
+    font-family: Gill Sans Extrabold, sans-serif;
+}
+
+li {
+    list-style-type: disc;
+}
+
+ul, ol {
+    margin: 0;
+    padding: 0;
+}
+
+/* Divs */
+/* About */
+.divTable {
+    margin:5px 0;
+    display: table;
+    width: 100%;
+}
+.divTableBody {
+    width: 100%;
+}
+.divTableRowHeader {
+    display: table-row;
+}
+.divTableRowContent {
+    display: table-row;
+}
+.divTableCellContent,
+.divTableCellContent_stretched,
+.divTableCellHeader,
+.divTableCellHeader_stretched {
+    display: table-cell;
+    /*font-family: Arial, sans-serif;*/
+    font-family: Gill Sans Extrabold, sans-serif;
+    overflow: hidden;
+    font-weight: normal;
+    word-break: normal;
+    vertical-align: top;
+    width: 20%;
+    padding: 10px;
+}
+.divTableCellHeader,
+.divTableCellHeader_stretched {
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom: 4px solid dimgrey;
+}
+.divTableCellContent_stretched,
+.divTableCellHeader_stretched {
+    width: 40%;
+}
+.divTableCellContent,
+.divTableCellContent_stretched {
+    font-size: 14px;
+    font-weight: normal;
+}
+.divSpacer {
+    width: 20px;
+}
+
+.headerBg2 {
+    background: #eee;
+}
+.headerBg1 {
+    background: white;
+}
+.contentBg2 {
+    background: #eee;
+}
+.contentBg1 {
+    background: white;
 }
