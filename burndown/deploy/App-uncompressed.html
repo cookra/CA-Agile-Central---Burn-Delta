@@ -365,95 +365,6 @@
     });
 }());
 
-                Ext.define('App.Config', {
-    config: {
-        // Quick Test //
-        PpanelsCollapsed: false,
-        // Versioning //
-        Pversion: 'v1.9b',
-        PappID: 'AC Burn Delta',
-        Powner: 'Richard Cook',
-        PreleaseDate: '2017-03-16: 11:47 GMT',
-        Pdescription: 'AC Burn Delta, click on the applications gear to see "App Settings".',
-
-
-        Pusage: 'AC Burn Delta: Deployment</br>' +
-            '[1]: As is [ Custom Page - Set to filter by Iteration, with a Custom HTML application ] (Select setting from the config and copy the source code)</br>' +
-            '[2]: As a standalone app within a Dashboard',
-        Psupport: '</br></br>AC Burn Delta: Support<br>' +
-            'The Support button below will collect & email the following details via your default email client (you will be able to view this informatio before sending):</br>' +
-            '[1]: System information (various information about the system you are using)</br>' +
-            '[2]: Agile Central information (various information on the workspace, project and user account setting)',
-
-        // Git Repo Details
-        PrepoAddress: 'not shared',
-        // Emailer Contact Details
-        pEmailSupportMessage: '*** [AC AC Burn Delta] Custom Application AC Support Request',
-        pEmailSupportAddress: 'richard.cook@barclaycard.co.uk',
-        pEmailerMessage: '========== Please add your comments above this line ==========',
-        // Rally Colours
-        PrallyColours_10: ['#0096DB', '#004A9D', '#FF3C00', '#FF8D00', '#FFDC00', '#6F7376', '#FFF', '#FF0069', '#41006E', '#00710C'],
-        // Barclays Colours
-        PbarclaysColours_5: ['#145FAC', '#437EA0', '#00AEEF', '#FFF', '#FFA000'],
-
-        PmyColours: ["#d61551", "#c9506f", "#6a0b70", "#0e1026", "#e53118", "#262428", "#c9d940", "#d3272b", "#ea2b30", "#59595b", "#242021", "#ebe7e4", "#437EA0"], // Bits we need
-        PtabBGstripePercent: 5,
-
-
-    },
-    _divPanels: function (a, b) {
-        var o;
-        var st = 'style="';
-        var bg = 'background:';
-        var md = ';';
-        var cl = 'color:';
-        var f = '";';
-        var megan = [{
-            "header": "#d61551"
-        }, {
-            "color": "#c9506f"
-        }];
-        o = st + bg + megan[a].header+ md + cl + megan[b].color + f;
-
-
-        return o;
-    },
-    _writePanelContent: function (t) {
-
-        if (t === 'about') {
-            var o = '<div class="divTable">' +
-                '<div class="divTableBody">' +
-                '<div class="divTableRowHeader">' +
-                '<div class="divTableCellHeader_stretched" ' + this._divPanels(0,1) + '>About</div>' +
-                '<div class="divSpacer">&nbsp;</div>' +
-                '<div class="divTableCellHeader" ' + this._divPanels(0,1) + '>Configuration</div>' +
-                '<div class="divSpacer">&nbsp;</div>' +
-                '<div class="divTableCellHeader" ' + this._divPanels(0,1) + '">Data Types</div>' +
-                '<div class="divSpacer">&nbsp;</div>' +
-                '<div class="divTableCellHeader" ' + this._divPanels(0,1) + '>Chart Type</div>' +
-                '</div>' +
-                '<div class="divTableRowContent">' +
-                '<div class="divTableCellContent_stretched contentBg1">Displays the Burn delta between remaining and accepted user stories</div>' +
-                '<div class="divSpacer">&nbsp;</div>' +
-                '<div class="divTableCellContent contentBg2">&nbsp;</div>' +
-                '<div class="divSpacer">&nbsp;</div>' +
-                '<div class="divTableCellContent contentBg2"><ol><li>Planned Estimate</li><li>User Story Count</li></ol></div>' +
-                '<div class="divSpacer">&nbsp;</div>' +
-                '<div class="divTableCellContent contentBg2"><ol><li>Area</li><li>Column</li><li>Line</li><li>Split</li></ol></div>' +
-                '</div>' +
-                '</div>' +
-                '</div>';
-            return o;
-        }
-    },
-    _generate_Version: function () {
-        var output = this.Pversion;
-        return output;
-    },
-    constructor: function (config) {
-        this.initConfig(config);
-    },
-});
                 Ext.define('App.Emailer', {
     _emailer: function (context_User, context_Project, context_Workspace) {
         var string, subject;
@@ -470,160 +381,6 @@
         string = encodeURIComponent(string);
         window.location = 'mailto:' + Ext.create('App.Config').pEmailSupportAddress + '?subject=' + subject + '&body=' + string;
     },
-});
-                Ext.define('App.Layout', {
-    _create: function (o) {
-        if (o.type === 'btn') {
-            console.log(o);
-            var object = Ext.create('Ext.button.Button', {
-                text: o.text,
-                margin: o.margin,
-                cls: o.cls,
-                style: {
-                    backgroundColor: o.color,
-                },
-                listeners: {
-                    afterrender: function (v) {
-                        v.el.on('click', function () {
-                            console.log('[' + o.type + '] Clicked');
-                            Ext.create('App.Emailer')._emailer(MySharedData.supportArray, a_context_User, a_context_Project, a_context_Workspace);
-                        });
-                    },
-                    scope: this
-                },
-            });
-            return object;
-        } else if (o.type === 'con') {
-            console.log('CONTAINER ',o);
-            var object = Ext.create('Ext.container.Container', {
-                layout: o.layout,
-                align: o.align,
-                height: o.height,
-                width: o.height,
-                border: o.border,
-                id: o.id,
-                itemId: o.itemId,
-                margin: o.margin,
-                padding: o.padding,
-                html: o.html,
-                cls: o.cls,
-                style: {
-                    background: o.bg_color,
-                },
-                layoutConfig: {
-                    align: o.align,
-                },
-            });
-            return object;
-        } else if (o.type === 'pan') {
-            console.log(o);
-            var object = Ext.create('Ext.panel.Panel', {
-                layout: o.layout,
-                align: o.align,
-                height: o.height,
-                width: o.width,
-                border: o.border,
-                id: o.id,
-                itemId: o.itemId,
-                margin: o.margin,
-                padding: o.padding,
-                html: o.html,
-                bodyPadding: o.bodyPadding,
-                cls: o.cls,
-                flex: o.flex,
-                style: {
-                    background: o.color,
-                },
-            });
-            return object;
-        } else if (o.type === 'udd') {
-            console.log(o);
-            var object = Ext.create('Rally.ui.combobox.UserSearchComboBox', {
-                storeConfig: {
-                    model: o.model
-                },
-                fieldLabel: o.fieldLabel,
-                project: o.project,
-                itemId: o.itemId,
-                id: o.id,
-                margin: o.margin,
-                noEntryText: '-- All --',
-                defaultSelectionPosition: 'first',
-                listeners: {
-                    select: function () {
-                        console.log('clicked');
-                        this._mask('myInfoPanel');
-                        this._kickoff('User');
-                    },
-                    scope: this
-                }
-            });
-            return object;
-        } else if (o.type === 'idd') {
-            console.log(o);
-            var object = Ext.create('Rally.ui.combobox.PortfolioItemTypeComboBox', {
-
-                itemId: o.itemId,
-                fieldLabel: o.fieldLabel,
-                labelAlign: o.labelAlign,
-                id: o.id,
-                margin: o.margin,
-                listeners: {
-                    select: function () {
-                        console.log('clicked');
-                        this._mask('myInfoPanel');
-                        this._kickoff('User');
-                    },
-                    scope: this
-                }
-            });
-            return object;
-        } else if (o.type === 'ser') {
-            console.log(o);
-            var object = Ext.create('Rally.ui.combobox.SearchComboBox', {
-                storeConfig: {
-                    model: o.model
-                },
-                itemId: o.itemId,
-                fieldLabel: o.fieldLabel,
-                labelAlign: o.labelAlign,
-                id: o.id,
-                margin: o.margin,
-                width: o.width,
-                listeners: {
-                    specialkey: function (field, e) {
-                        if (e.getKey() === e.ENTER) {
-                            console.log('enter');
-                            this._mask('myInfoPanel');
-                            this._kickoff('Search');
-                        }
-                    },
-                    select: function () {
-                        console.log('select');
-                        this._mask('myInfoPanel');
-                        this._kickoff('Search');
-                    },
-                    scope: this
-                }
-            });
-            return object;
-        }else if (o.type === 'box') {
-            console.log(o);
-            var object = Ext.create('Ext.Component', {
-                height: o.height,
-                width: o.width,
-                id: o.id,
-                margin: o.margin,
-                autoEl: {
-                    tag: 'div',
-                    cls: 'myInfoPanel',
-                    html: "",
-                },
-                flex:1,
-            });
-            return object;
-        }
-    }
 });
                 Ext.define('App.Loader', {
     _build: function (type) {
@@ -707,25 +464,6 @@
         return Ext.create('App.Tools')._common_Array_Outputter(a);
     },
 });
-                Ext.define('Loading', {
-    singleton: true,
-    _mask: function (message) {
-        console.log('@ _mask We are loading the store, show the spinner');
-        if (this.sparkler) {
-            this.sparkler.destroy();
-        }
-        this.sparkler = new Ext.LoadMask(this, {
-            msg: message
-        });
-        this.sparkler.show();
-    },
-    _unmask: function () {
-        console.log('@ _unmask We have the data so destroy the spinner');
-        if (this.sparkler) {
-            this.sparkler.hide();
-        }
-    },
-});
                 Ext.define('App.Tools', {
     _shadeBlendConvert: function (color, percent) {
         var R = parseInt(color.substring(1, 3), 16);
@@ -760,113 +498,104 @@
 });
                 Ext.define('App.Information', {
     config: {
+        // Quick Test //
+        PpanelsCollapsed: false,
+        // Versioning //
+        Pversion: 'v1.9b',
+        PappID: 'AC Burn Delta',
+        Powner: 'Richard Cook',
+        PreleaseDate: '2017-03-16: 11:47 GMT',
+        Pdescription: 'AC Burn Delta, click on the applications gear to see "App Settings".',
+        Pusage: 'AC Burn Delta: Deployment</br>' +
+            '[1]: As is [ Custom Page - Set to filter by Iteration, with a Custom HTML application ] (Select setting from the config and copy the source code)</br>' +
+            '[2]: As a standalone app within a Dashboard',
+        Psupport: '</br></br>AC Burn Delta: Support<br>' +
+            'The Support button below will collect & email the following details via your default email client (you will be able to view this informatio before sending):</br>' +
+            '[1]: System information (various information about the system you are using)</br>' +
+            '[2]: Agile Central information (various information on the workspace, project and user account setting)',
+        // Git Repo Details
+        PrepoAddress: 'not shared',
+        // Emailer Contact Details
+        pEmailSupportMessage: '*** [AC AC Burn Delta] Custom Application AC Support Request',
+        pEmailSupportAddress: 'richard.cook@barclaycard.co.uk',
+        pEmailerMessage: '========== Please add your comments above this line ==========',
         // Rally Colours
-        //PrallyColours_10: ['#0096DB', '#004A9D', '#FF3C00', '#FF8D00', '#FFDC00', '#6F7376', '#FFF', '#FF0069', '#41006E', '#00710C'],
+        PrallyColours_10: ['#0096DB', '#004A9D', '#FF3C00', '#FF8D00', '#FFDC00', '#6F7376', '#FFF', '#FF0069', '#41006E', '#00710C'],
         // Barclays Colours
-        //PbarclaysColours_5: ['#145FAC', '#437EA0', '#00AEEF', '#FFF', '#FFA000'],
-
-        //PmyColours: ["#d61551", "#c9506f", "#6a0b70", "#0e1026", "#e53118", "#262428", "#c9d940", "#d3272b", "#ea2b30", "#59595b", "#242021", "#ebe7e4", "#437EA0"], // Bits we need
+        PbarclaysColours_5: ['#145FAC', '#437EA0', '#00AEEF', '#FFF', '#FFA000'],
+        PmyColours: ["#d61551", "#c9506f", "#6a0b70", "#0e1026", "#e53118", "#262428", "#c9d940", "#d3272b", "#ea2b30", "#59595b", "#242021", "#ebe7e4", "#437EA0"], // Bits we need
         PtabBGstripePercent: 5,
     },
-    _divFormater: function (a, b) {
-        var o;
-        var st = 'style="';
-        var bg = 'background:';
-        var md = ';';
-        var cl = 'color:';
-        var f = '";';
-        var megan = [{
-            "header": "#d61551"
-        }, {
-            "color": "#c9506f"
-        }];
-        o = st + bg + megan[a].header + md + cl + megan[b].color + f;
-
-
-        return o;
-    },
-    _writePanelContent: function (t) {
-        if (t === 'about') {
-            var o = '<div class="divTable">' +
-                '<div class="divTableBody">' +
-                '<div class="divTableRowHeader">' +
-                '<div class="divTableCellHeader_stretched" ' + this._divFormater(0, 1) + '>About</div>' +
-                '<div class="divSpacer">&nbsp;</div>' +
-                '<div class="divTableCellHeader" ' + this._divFormater(0, 1) + '>Configuration</div>' +
-                '<div class="divSpacer">&nbsp;</div>' +
-                '<div class="divTableCellHeader" ' + this._divFormater(0, 1) + '">Data Types</div>' +
-                '<div class="divSpacer">&nbsp;</div>' +
-                '<div class="divTableCellHeader" ' + this._divFormater(0, 1) + '>Chart Type</div>' +
-                '</div>' +
-                '<div class="divTableRowContent">' +
-                '<div class="divTableCellContent_stretched" ' + this._divFormater(1, 0) + '>Displays the Burn delta between remaining and accepted user stories</div>' +
-                '<div class="divSpacer">&nbsp;</div>' +
-                '<div class="divTableCellContent" ' + this._divFormater(1, 0) + '>&nbsp;</div>' +
-                '<div class="divSpacer">&nbsp;</div>' +
-                '<div class="divTableCellContent" ' + this._divFormater(1, 0) + '><ol><li>Planned Estimate</li><li>User Story Count</li></ol></div>' +
-                '<div class="divSpacer">&nbsp;</div>' +
-                '<div class="divTableCellContent" ' + this._divFormater(1, 0) + '><ol><li>Area</li><li>Column</li><li>Line</li><li>Split</li></ol></div>' +
-                '</div>' +
-                '</div>' +
-                '</div>';
-            return o;
+    _writePanelContent: function (type) {
+        var content, o;
+        spacerWidth = '20px';
+        headerBorder = 'border-bottom: 4px solid dimgrey';
+        if (type === 'infomation') {
+            o = [
+                [{m:'',p:'10px',colour:'#000',background:'#eee',type:'header',w:'40%',h:'',fontW: 'bold',fontS: '18px',txt:'About'}],
+                [{m:'',p:'10px',colour:'#000',background:'#eee',type:'contex',w:'40%',h:'',fontW: 'normal',fontS: '12px',txt:'Displays the Burn delta between remaining and accepted user stories'}],
+                [{m:'',p:'10px',colour:'#000',background:'#fff',type:'header',w:'20%',h:'',fontW: 'bold',fontS: '18px',txt:'Configuration'}],
+                [{m:'',p:'10px',colour:'#000',background:'#fff',type:'contex',w:'20%',h:'',fontW: 'normal',fontS: '14px',txt:''}],
+                [{m:'',p:'10px',colour:'#000',background:'#fff',type:'header',w:'20%',h:'',fontW: 'bold',fontS: '18px',txt:'Data Types'}],
+                [{m:'',p:'10px',colour:'#000',background:'#fff',type:'contex',w:'20%',h:'',fontW: 'normal',fontS: '14px',txt:'<li>Planned Estimate</li><li>User Story Count</li>'}],
+                [{m:'',p:'10px',colour:'#000',background:'#fff',type:'header',w:'20%',h:'',fontW: 'bold',fontS: '18px',txt:'Chart Type'}],
+                [{m:'',p:'10px',colour:'#000',background:'#fff',type:'contex',w:'20%',h:'',fontW: 'normal',fontS: '14px',txt:'<li>Area</li><li>Column</li><li>Line</li><li>Split</li>'}],
+              ];
         }
-    },
-    _generate_Version: function () {
-        var output = this.Pversion;
-        return output;
+        return this._divGenerator(o,spacerWidth,headerBorder);
     },
     _generate_Tabs: function () {
-        var h_panel = 160;
-        var h_button = 25;
-        var p_panel = 10;
-        var f_panel_font_size = 15;
-        var colour_Shade_Percent = 20;
+        var arrayMyColours = this.PmyColours;
+        var arrayBaColours = this.PbarclaysColours_5;
+        var application_vr = Ext.create('App.System')._this_Application_Details('inapp');
+        var config = [{
+            panel_height: 160,
+            panel_paddin: 10,
+            panel_font_s: 15,
+            applicationV: application_vr,
+            colour_barcl: arrayBaColours,
+            colour_custo: arrayMyColours,
+            panel_one_tx: this._writePanelContent('infomation'),
+            panel_one_tc: arrayMyColours[11],
+            panel_one_sc: this._stripeColourGenerator([{base_colour:arrayMyColours[11],stripe_angle:45,blend:20}]),
+            panel_two_tx: this.Pusage,
+            panel_two_tc: arrayMyColours[11],
+            panel_two_sc: this._stripeColourGenerator([{base_colour:arrayMyColours[11],stripe_angle:45,blend:20}]),
+            panel_thr_tx: this._generate_Version(),
+            panel_thr_tc: arrayMyColours[11],
+            panel_thr_sc: this._stripeColourGenerator([{base_colour:arrayMyColours[11],stripe_angle:45,blend:20}]),
+            panel_sup_tx: this.Psupport,
+            panel_sup_tc: arrayMyColours[11],
+            panel_sup_sc: this._stripeColourGenerator([{base_colour:arrayMyColours[11],stripe_angle:45,blend:20}]),
+            butto_height: 25,
+            butto_colour: 'red',
+        }];
 
-        var xData1;// = getContext().getUser();
-        var xData2;// = getContext().getProject();
-        var xData3;// = getContext().getWorkspace();
-        var appVersion = Ext.create('App.System')._this_Application_Details('inapp');
-        var myColours_Barclays = Ext.create('App.Config').PbarclaysColours_5;
-        var myColours_MyColours = Ext.create('App.Config').PmyColours;
-
-        var about___Text = this._writePanelContent('about');
-        var version_Text = Ext.create('App.Config')._generate_Version();
-        var usage___Text = Ext.create('App.Config').Pusage;
-        var support___Text = Ext.create('App.Config').Psupport;
-
-        /* Colour Reference from Config Arrays
-        PmyColours: ["#d61551", "#c9506f", "#6a0b70", "#0e1026", "#e53118", "#262428", "#c9d940", "#d3272b", "#ea2b30", "#59595b", "#242021", "#ebe7e4", "#437EA0"],
-        PbarclaysColours_5: ['#145FAC', '#437EA0', '#00AEEF', '#FFF', '#FFA000'],
-        */
-        /* ACTIVE THEME -> Orange */
-        var tabColour_1 = myColours_MyColours[11];
-        var tabColour_2 = myColours_MyColours[11];
-        var tabColour_3 = myColours_MyColours[11];
-        var panelBaseColor = myColours_MyColours[12];
-        var bodyStyle = 'font-size:' + f_panel_font_size + 'px;padding:' + p_panel + 'px;';
-
-        var colour_Background_Darken = Ext.create('App.Tools')._shadeBlendConvert(panelBaseColor, colour_Shade_Percent);
-        var colour_Background = 'background: repeating-linear-gradient(  45deg,  ' + panelBaseColor + ',' + panelBaseColor + ' 10px,  ' + colour_Background_Darken + ' 10px,  ' + colour_Background_Darken + ' 20px);';
         // Build Details Container
+        return this._panelGenerator(config);
+    },
+    _stripeColourGenerator: function (a){
+        var stripe_color = Ext.create('App.Tools')._shadeBlendConvert(a[0].base_colour, a[0].blend);
+        return 'background: repeating-linear-gradient('+a[0].stripe_angle+'deg,' + a[0].base_colour + ',' + a[0].base_colour + ' 10px,' + stripe_color + ' 10px,' + stripe_color + ' 20px);';
+    },
+    _panelGenerator: function (a){
         var container = Ext.create('Ext.container.Container', {
             xtype: 'Viewport',
             items: [{
                 region: 'north',
-                collapsed: Ext.create('App.Config').PpanelsCollapsed,
                 items: [{
                     xtype: 'tabpanel',
                     width: '100%',
                     items: [{
                         title: 'About',
                         width: '100%',
-                        html: about___Text,
-                        height: h_panel,
-                        bodyStyle: colour_Background + bodyStyle,
+                        html: a[0].panel_one_tx,
+                        height: a[0].panel_height,
+                        bodyStyle: a[0].panel_one_sc + 'font-size:' + a[0].panel_font_s + 'px;padding:' + a[0].panel_paddin + 'px;',
                         cls: 'fixTabMargins',
                         tabConfig: {
                             style: {
-                                background: tabColour_1,
+                                background: a[0].panel_one_tc,
                             }
                         },
                         /*
@@ -877,45 +606,45 @@
                     }, {
                         title: 'Usage',
                         width: '100%',
-                        html: usage___Text,
-                        height: h_panel,
-                        bodyStyle: colour_Background + bodyStyle,
+                        html: a[0].panel_two_tx,
+                        height: a[0].panel_height,
+                        bodyStyle: a[0].panel_two_sc + 'font-size:' + a[0].panel_font_s + 'px;padding:' + a[0].panel_paddin + 'px;',
                         cls: 'fixTabMargins',
                         tabConfig: {
                             style: {
-                                background: tabColour_2,
+                                background: a[0].panel_two_tc,
                             }
                         },
                     }, {
                         title: 'Version',
                         width: '100%',
-                        html: version_Text,
-                        height: h_panel,
-                        bodyStyle: colour_Background + bodyStyle,
+                        html: a[0].panel_thr_tx,
+                        height: a[0].panel_height,
+                        bodyStyle: a[0].panel_thr_sc + 'font-size:' + a[0].panel_font_s + 'px;padding:' + a[0].panel_paddin + 'px;',
                         cls: 'fixTabMargins',
                         tabConfig: {
                             style: {
-                                background: tabColour_2,
+                                background: a[0].panel_thr_tc,
                             }
                         },
                     }, {
                         title: 'Support',
                         width: '100%',
-                        html: support___Text,
-                        height: h_panel,
-                        bodyStyle: colour_Background + bodyStyle,
+                        html: a[0].panel_sup_tx,
+                        height: a[0].panel_height,
+                        bodyStyle: a[0].panel_sup_sc + 'font-size:' + a[0].panel_font_s + 'px;padding:' + a[0].panel_paddin + 'px;',
                         cls: 'fixTabMargins',
                         tabConfig: {
                             style: {
-                                background: tabColour_3,
+                                background: a[0].panel_sup_tc,
                             }
                         },
                         items: [{
                             xtype: 'button',
                             text: 'Contact Support',
-                            height: h_button,
+                            height: a[0].butto_height,
                             style: {
-                                backgroundColor: 'red',
+                                background: a[0].butto_colour,
                             },
                             listeners: {
                                 afterrender: function (v) {
@@ -931,6 +660,67 @@
             }]
         });
         return container;
+    },
+    _divGenerator: function (o,spacerWidth,headerBorder){
+        // Build Container
+        content = '<div class="divTable"><div class="divTableBody"><div class="divTableRowHeader">';
+        var spaceInsertCount = o.length - 1;
+        if (o.length & 1) {
+            divSpacerCount = o.length;
+        } else {
+            divSpacerCount = spaceInsertCount;
+        }
+        // Build Headers
+        for (var x = 0; x < o.length; x++) {
+            if (x & 1) { // Check if the number is odd or even as we want to create a zebra effect
+                if (x < divSpacerCount) {
+                    content += this._htmlGenerator('spacer',spacerWidth,headerBorder);
+                }
+            } else {
+                content += this._htmlGenerator(o[x][0],spacerWidth,headerBorder);
+            }
+        }
+        // Build Next Row
+        content += '</div><div class="divTableRowContent">';
+        // Build Content
+        for (x = 1; x < o.length; x++) {
+            if (x & 1) { // Check if the number is odd or even as we want to create a zebra effect
+                content += this._htmlGenerator(o[x][0],spacerWidth,headerBorder);
+            }
+            if (x < divSpacerCount) {
+                content += this._htmlGenerator('spacer',spacerWidth,headerBorder);
+            }
+        }
+        // Build End HTML
+        content += '</div></div></div>';
+        // *** END (Lets return our html)
+        return content;
+    },
+    _htmlGenerator: function (object,spacerWidth,headerBorder) {
+        if (object === 'spacer') {
+            console.log('spacer ',spacerWidth);
+            o = 'style="width:'+spacerWidth+'";';
+            o = '<div '+o+'>&nbsp;</div>';
+        } else {
+                console.log('build');
+            if(object.type==='header'){
+                console.log('header');
+                border = headerBorder;
+            }else{
+                console.log('contex');
+                border = '';
+            }
+            o= 'style="font_size:'+object.fontS+';font-family:Gill Sans Extrabold, sans-serif;font-weight:'+object.fontW+';overflow:hidden;word-break:normal;';
+            o+= 'vertical-align:top;display:table-cell;';
+            o+= 'width:'+object.w+';height:'+object.h+';padding:'+object.p+';margin:'+object.m+';'+border+';';
+            o+= 'background:'+object.background+';color:'+object.colour+';"';
+            o = '<div '+o+'>' + object.txt + '</div>';
+        }
+        return o;
+    },
+    _generate_Version: function () {
+        var output = this.Pversion;
+        return output;
     },
     constructor: function (config) {
         this.initConfig(config);
@@ -1130,7 +920,6 @@
             'Rally.apps.charts.IntegrationHeaders',
             'Rally.apps.charts.burndown.BurnDownChart'
         ],
-
         mixins: [
             'Rally.apps.charts.DateMixin'
         ],
@@ -1146,7 +935,7 @@
 
         scopeObject: undefined,
 
-        customScheduleStates: null, // defaults hide problems
+        customScheduleStates: true, // defaults hide problems
 
         config: {
             defaultSettings: {
@@ -1173,12 +962,6 @@
                 this._rebuildChartForScope(scope.getRecord().get('_ref'));
             }
         },
-        _buildLayout: function () {
-  
-            this.add(Ext.create('App.Information')._generate_Tabs());
-            //this._mask();
-        },
-
         launch: function () {
             this._buildLayout();
             if (this._settingsInvalid()) {
@@ -1202,11 +985,12 @@
                 });
             }
         },
-
-        _addHelpComponent: function () {
-            this.down('#header').add(this._buildHelpComponent());
+        _buildLayout: function () {
+            this.add(Ext.create('App.Information')._generate_Tabs());
         },
-
+        _addHelpComponent: function () {
+            //this.down('#header').add(this._buildHelpComponent());
+        },
         _buildHelpComponent: function () {
             return Ext.create('Ext.Component', {
                 renderTpl: Rally.util.Help.getIcon({
@@ -2313,35 +2097,6 @@ ol {
 }
 .divTableRowContent {
   display: table-row;
-}
-.divTableCellContent,
-.divTableCellContent_stretched,
-.divTableCellHeader,
-.divTableCellHeader_stretched {
-  display: table-cell;
-  /*font-family: Arial, sans-serif;*/
-  font-family: Gill Sans Extrabold, sans-serif;
-  overflow: hidden;
-  font-weight: normal;
-  word-break: normal;
-  vertical-align: top;
-  width: 20%;
-  padding: 10px;
-}
-.divTableCellHeader,
-.divTableCellHeader_stretched {
-  font-size: 18px;
-  font-weight: bold;
-  border-bottom: 4px solid dimgrey;
-}
-.divTableCellContent_stretched,
-.divTableCellHeader_stretched {
-  width: 40%;
-}
-.divTableCellContent,
-.divTableCellContent_stretched {
-  font-size: 14px;
-  font-weight: normal;
 }
 .divSpacer {
   width: 20px;
