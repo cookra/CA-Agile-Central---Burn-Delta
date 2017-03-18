@@ -8,108 +8,78 @@ Ext.define('App.Information', {
         //PmyColours: ["#d61551", "#c9506f", "#6a0b70", "#0e1026", "#e53118", "#262428", "#c9d940", "#d3272b", "#ea2b30", "#59595b", "#242021", "#ebe7e4", "#437EA0"], // Bits we need
         PtabBGstripePercent: 5,
     },
-    _divFormater: function (a, b) {
-        var o;
-        var st = 'style="';
-        var bg = 'background:';
-        var md = ';';
-        var cl = 'color:';
-        var fi = '";';
-        var megan = [{
-            "header": "#d61551"
-        }, {
-            "color": "#c9506f"
-        }];
-        o = st + bg + megan[a].header + md + cl + megan[b].color + fi;
-        return o;
-    },
-    _htmlGenerator: function (t) {
-        if (t === 'spacer') {
-            console.log('spacer');
-            o = '<div class="divSpacer" style="background:red">&nbsp;</div>';
-        } else {
-            o = '<div class="divTableCellHeader_stretched">' + t + '</div>';
-        }
-        return o;
-    },
     _writePanelContent: function (type) {
-        console.log('dd');
+        var content, o;
+        spacerWidth = '20px';
+        headerBorder = 'border-bottom: 4px solid dimgrey';
         if (type === 'infomation') {
-            var o = [
-                'About',
-                'Displays the Burn delta between remaining and accepted user stories',
-                'Configuration',
-                '',
-                'Data Types',
-                '<ol><li>Planned Estimate</li><li>User Story Count</li></ol>',
-                'Chart Type',
-                '<ol><li>Area</li><li>Column</li><li>Line</li><li>Split</li></ol>',
-                'Chart Type',
-                '<ol><li>Area</li><li>Column</li><li>Line</li><li>Split</li></ol>',
-            ];
-            var content = '<div class="divTable"><div class="divTableBody"><div class="divTableRowHeader">';
-            var rowCount = 2;
-            var spaceInsertCount = o.length - 1;
-            var j = 0;
-            var test;
-            if (o.length & 1) {
-                divSpacerCount = o.length;
-            } else {
-                divSpacerCount = o.length-1;
-            }
-            console.log(divSpacerCount);
-            for (var x = 0; x < o.length; x++) {
-                if (x & 1) {
-                    if (x < divSpacerCount) {
-                        content += this._htmlGenerator('spacer');
-                    }
-                } else {
-                    content += this._htmlGenerator(o[x], 'blue,');
-                }
-            }
-            j = 0;
-            //
-            content += '</div><div class="divTableRowContent">';
-            for (var x = 1; x < o.length; x++) {
-                if (x & 1) {
-                    content += this._htmlGenerator(o[x], 'red,');
-                } else {}
-                    if (x < divSpacerCount) {
-                        content += this._htmlGenerator('spacer');
-                    }
-            }
-            content += '</div></div></div>';
-            return content;
+            o = [
+                [{m:'',p:'10px',colour:'#000',background:'#eee',type:'header',w:'40%',h:'',fontW: 'bold',fontS: '18px',txt:'About'}],
+                [{m:'',p:'10px',colour:'#000',background:'#eee',type:'contex',w:'40%',h:'',fontW: 'normal',fontS: '14px',txt:'Displays the Burn delta between remaining and accepted user stories'}],
+                [{m:'',p:'10px',colour:'#000',background:'#fff',type:'header',w:'20%',h:'',fontW: 'bold',fontS: '18px',txt:'Configuration'}],
+                [{m:'',p:'10px',colour:'#000',background:'#fff',type:'contex',w:'20%',h:'',fontW: 'normal',fontS: '14px',txt:''}],
+                [{m:'',p:'10px',colour:'#000',background:'#fff',type:'header',w:'20%',h:'',fontW: 'bold',fontS: '18px',txt:'Data Types'}],
+                [{m:'',p:'10px',colour:'#000',background:'#fff',type:'contex',w:'20%',h:'',fontW: 'normal',fontS: '14px',txt:'<li>Planned Estimate</li><li>User Story Count</li>'}],
+                [{m:'',p:'10px',colour:'#000',background:'#fff',type:'header',w:'20%',h:'',fontW: 'bold',fontS: '18px',txt:'Chart Type'}],
+                [{m:'',p:'10px',colour:'#000',background:'#fff',type:'contex',w:'20%',h:'',fontW: 'normal',fontS: '14px',txt:'<li>Area</li><li>Column</li><li>Line</li><li>Split</li>'}],
+              ];
         }
+        // Build Container
+        content = '<div class="divTable"><div class="divTableBody"><div class="divTableRowHeader">';
+        var spaceInsertCount = o.length - 1;
+        if (o.length & 1) {
+            divSpacerCount = o.length;
+        } else {
+            divSpacerCount = spaceInsertCount;
+        }
+        // Build Headers
+        for (var x = 0; x < o.length; x++) {
+            if (x & 1) { // Check if the number is odd or even as we want to create a zebra effect
+                if (x < divSpacerCount) {
+                    content += this._htmlGenerator('spacer',spacerWidth,headerBorder);
+                }
+            } else {
+                content += this._htmlGenerator(o[x][0],spacerWidth,headerBorder);
+            }
+        }
+        // Build Next Row
+        content += '</div><div class="divTableRowContent">';
+        // Build Content
+        for (x = 1; x < o.length; x++) {
+            if (x & 1) { // Check if the number is odd or even as we want to create a zebra effect
+                content += this._htmlGenerator(o[x][0],spacerWidth,headerBorder);
+            }
+            if (x < divSpacerCount) {
+                content += this._htmlGenerator('spacer',spacerWidth,headerBorder);
+            }
+        }
+        // Build End HTML
+        content += '</div></div></div>';
+        // *** END (Lets return our html)
+        return content;
+
     },
-    _writePanelContent_old: function (t) {
-        var o = '<div class="divTable">' +
-            '<div class="divTableBody">' +
-            '<div class="divTableRowHeader">' +
-            this._htmlGenerator('box_1_h') +
-            this._htmlGenerator('spacer') +
-            this._htmlGenerator('box_2_h') +
-            this._htmlGenerator('spacer') +
-            this._htmlGenerator('box_3_h') +
-            this._htmlGenerator('spacer') +
-            this._htmlGenerator('box_4_h') +
-            '</div>' +
-            '<div class="divTableRowContent">' +
-            this._htmlGenerator(1) +
-            this._htmlGenerator('spacer') +
-            this._htmlGenerator(3) +
-            this._htmlGenerator('spacer') +
-            this._htmlGenerator(5) +
-            this._htmlGenerator('spacer') +
-            this._htmlGenerator(7) +
-            '</div>' +
-            '</div>' +
-            '</div>';
+    _htmlGenerator: function (object,spacerWidth,headerBorder) {
+        if (object === 'spacer') {
+            console.log('spacer ',spacerWidth);
+            o = 'style="width:'+spacerWidth+'";';
+            o = '<div '+o+'>&nbsp;</div>';
+        } else {
+                console.log('build');
+            if(object.type==='header'){
+                console.log('header');
+                border = headerBorder;
+            }else{
+                console.log('contex');
+                border = '';
+            }
+            o= 'style="font_size:'+object.fontS+';font-family:Gill Sans Extrabold, sans-serif;font-weight:'+object.fontW+';overflow:hidden;word-break:normal;';
+            o+= 'vertical-align:top;display:table-cell;';
+            o+= 'width:'+object.w+';height:'+object.h+';padding:'+object.p+';margin:'+object.m+';'+border+';';
+            o+= 'background:'+object.background+';color:'+object.colour+';"';
+            o = '<div '+o+'>' + object.txt + '</div>';
+        }
         return o;
-    },
-    _generate_Version: function () {
-        var output = this.Pversion;
-        return output;
     },
     _generate_Tabs: function () {
         var h_panel = 160;
@@ -136,7 +106,7 @@ Ext.define('App.Information', {
         var tabColour_1 = myColours_MyColours[11];
         var tabColour_2 = myColours_MyColours[11];
         var tabColour_3 = myColours_MyColours[11];
-        var panelBaseColor = myColours_MyColours[12];
+        var panelBaseColor = myColours_MyColours[9];
         var bodyStyle = 'font-size:' + f_panel_font_size + 'px;padding:' + p_panel + 'px;';
 
         var colour_Background_Darken = Ext.create('App.Tools')._shadeBlendConvert(panelBaseColor, colour_Shade_Percent);
@@ -224,6 +194,10 @@ Ext.define('App.Information', {
             }]
         });
         return container;
+    },
+    _generate_Version: function () {
+        var output = this.Pversion;
+        return output;
     },
     constructor: function (config) {
         this.initConfig(config);
