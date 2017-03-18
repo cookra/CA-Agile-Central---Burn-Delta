@@ -365,154 +365,15 @@
     });
 }());
 
-                Ext.define('App.Emailer', {
-    _emailer: function (context_User, context_Project, context_Workspace) {
-        var string, subject;
-        subject = Ext.create('App.Config').pEmailSupportMessage;
-        string = '\r\n';
-        string += '\r\n';
-        string += '\r\n';
-        string += Ext.create('App.Config').pEmailerMessage;
-        string += '\r\n';
-        string += Ext.create('App.System')._this_Application_Details('email');
-        string += Ext.create('App.System')._user_Vars();
-        string += Ext.create('App.System')._user_Rally_Vars(context_User, context_Project, context_Workspace);
-        console.log(string);
-        string = encodeURIComponent(string);
-        window.location = 'mailto:' + Ext.create('App.Config').pEmailSupportAddress + '?subject=' + subject + '&body=' + string;
-    },
-});
-                Ext.define('App.Loader', {
-    _build: function (type) {
-        var output;
-        var colour_Array = Ext.create('App.Config').PrallyColours_10;
-        var colour_Norm = colour_Array[Math.floor((Math.random() * 10))];
-        var Colour_Dark = Ext.create('App.Tools')._shadeBlendConvert(colour_Norm, -30);
-        switch (type) {
-            case 'bar':
-                var html = 'style= "background-image: repeating-linear-gradient(-45deg,' + colour_Norm + ',' + colour_Norm + ' 11px,' + Colour_Dark + ' 10px,' + Colour_Dark + ' 20px")';
-                output = '<div class = "bar" ' + html + '></div>';
-                break;
-            case 'wave':
-                output = '<div class = "loader">Loading...</div>';
-                break;
-        }
-        return output;
-    }
-});
-                Ext.define('App.System', {
-    // Created by Richard Cook ::: Cookra Limited
-    // Barclaycard richard.cook@barclaycard.co.uk
-    // v4.8
-    // Updated 2017-03-08
-    _this_Application_Details: function (type) {
-        var Output;
-        var a = [];
-        a.push('> - - - - - - - - - - < Application Details');
-        a.push('> App Name : ' + 'Orphaned Items');
-        a.push('> App Version : ' + 'v4.1b');
-        a.push('> App Version Status : ' + 'beta');
-        a.push('> App Designer : ' + 'Richard Cook');
-        a.push('> App Description : ' + 'Custom Ext JS Application that displays orphaned artifacts');
-        a.push('> App Release Date : ' + '2017-03-13');
-        if(type==='email'){
-            output = Ext.create('App.Tools')._common_Array_Outputter(a);
-        }else if(type==='inapp'){
-            output = a;
-        }
-        return output;
-    },
-    _this_Application_Output: function (array) {
-        var a = [];
-        console.log('xxx ',array);
-        a.push('> - - - - - - - - - - < Application Output');
-        for (var i = 0; i < array.length; i++) {
-            a.push('> FormattedID : ' + array[i].raw.FormattedID + ' Name : ' + array[i].raw.Name + ' _Ref : ' + array[i].raw._ref);
-        }
-        array = undefined;
-        return Ext.create('App.Tools')._common_Array_Outputter(a);
-    },
-    _user_Vars: function () {
-        var a = [];
-        a.push('> - - - - - - - - - - < Local Details');
-        a.push('> Browser Web App Name : ' + navigator.appName);
-        a.push('> Browser User Agent : ' + navigator.userAgent);
-        a.push('> Browser Version : ' + navigator.appVersion);
-        a.push('> Browser Code Name : ' + navigator.appCodeName);
-        a.push('> Platform : ' + navigator.platform);
-        a.push('> OS CPU : ' + navigator.oscpu);
-        a.push('> Cookies : ' + navigator.cookieEnabled);
-        a.push('> Outer Width : ' + window.outerWidth);
-        a.push('> Outer Height : ' + window.outerHeight);
-        a.push('> Inner Width : ' + window.innerWidth);
-        a.push('> Inner Height : ' + window.innerHeight);
-        a.push('> Base URI : ' + document.getElementsByTagName('script')[0].baseURI);
-        a.push('> SRC : ' + document.getElementsByTagName('script')[0].src);
-        a.push('> LocalName : ' + document.getElementsByTagName('script')[0].localName);
-        a.push('> Type : ' + document.getElementsByTagName('script')[0].type);
-        return Ext.create('App.Tools')._common_Array_Outputter(a);
-    },
-    _user_Rally_Vars: function (context_User, context_Project, context_Workspace) {
-        var a = [];
-        a.push('> - - - - - - - - - - < User Details');
-        a.push('> AC User Username : ' + context_User.UserName);
-        a.push('> AC User Name : ' + context_User._refObjectName);
-        a.push('> AC User Role : ' + context_User.Role);
-        a.push('> AC Application Launched From Node : ' + context_Project._refObjectName);
-        a.push('> AC Application Workspace Name : ' + context_Workspace._refObjectName);
-        a.push('> AC Application Workspace Date/Time Format : ' + context_Workspace.WorkspaceConfiguration.DateFormat);
-        return Ext.create('App.Tools')._common_Array_Outputter(a);
-    },
-});
-                Ext.define('App.Tools', {
-    _shadeBlendConvert: function (color, percent) {
-        var R = parseInt(color.substring(1, 3), 16);
-        var G = parseInt(color.substring(3, 5), 16);
-        var B = parseInt(color.substring(5, 7), 16);
-        R = parseInt(R * (100 + percent) / 100);
-        G = parseInt(G * (100 + percent) / 100);
-        B = parseInt(B * (100 + percent) / 100);
-        R = (R < 255) ? R : 255;
-        G = (G < 255) ? G : 255;
-        B = (B < 255) ? B : 255;
-        var RR = ((R.toString(16).length === 1) ? "0" + R.toString(16) : R.toString(16));
-        var GG = ((G.toString(16).length === 1) ? "0" + G.toString(16) : G.toString(16));
-        var BB = ((B.toString(16).length === 1) ? "0" + B.toString(16) : B.toString(16));
-        return "#" + RR + GG + BB;
-    },
-    _common_Array_Outputter: function (array) {
-        var character_Return = '\r\n';
-        var l = array.length;
-        var output = '';
-        var padSize = String(l).length;
-        for (var x = 0; x < l; x++) {
-            output += '[#' + this._number_Pad(x, padSize) + '] ' + array[x] + character_Return;
-        }        
-        console.log(output);
-        array = undefined;
-        return output;
-    },
-    _number_Pad: function (num, size) {
-        return Array(Math.max(size - String(num).length + 1, 0)).join(0) + num;
-    }
-});
                 Ext.define('App.Information', {
     config: {
-        // Quick Test //
-        PpanelsCollapsed: false,
         // Versioning //
-        Pversion: 'v1.9b',
-        PappID: 'AC Burn Delta',
-        Powner: 'Richard Cook',
-        PreleaseDate: '2017-03-16: 11:47 GMT',
-        Pdescription: 'AC Burn Delta, click on the applications gear to see "App Settings".',
-        Pusage: 'AC Burn Delta: Deployment</br>' +
-            '[1]: As is [ Custom Page - Set to filter by Iteration, with a Custom HTML application ] (Select setting from the config and copy the source code)</br>' +
-            '[2]: As a standalone app within a Dashboard',
-        Psupport: '</br></br>AC Burn Delta: Support<br>' +
-            'The Support button below will collect & email the following details via your default email client (you will be able to view this informatio before sending):</br>' +
-            '[1]: System information (various information about the system you are using)</br>' +
-            '[2]: Agile Central information (various information on the workspace, project and user account setting)',
+        pAppVers: 'v2.0b',
+        pAppStat: 'beta',
+        pAppName: 'AC Burn Delta',
+        pAppDesc: 'Measures the Delta between users stories in To Do & Accepted',
+        pAppOwne: 'Richard Cook',
+        pAppDate: '2017-03-18: 11:47 GMT',
         // Git Repo Details
         PrepoAddress: 'not shared',
         // Emailer Contact Details
@@ -575,7 +436,7 @@
         return this._panelGenerator(config);
     },
     _stripeColourGenerator: function (a){
-        var stripe_color = Ext.create('App.Tools')._shadeBlendConvert(a[0].base_colour, a[0].blend);
+        var stripe_color = Ext.create('Tools')._shadeBlendConvert(a[0].base_colour, a[0].blend);
         return 'background: repeating-linear-gradient('+a[0].stripe_angle+'deg,' + a[0].base_colour + ',' + a[0].base_colour + ' 10px,' + stripe_color + ' 10px,' + stripe_color + ' 20px);';
     },
     _panelGenerator: function (a){
@@ -649,7 +510,7 @@
                             listeners: {
                                 afterrender: function (v) {
                                     v.el.on('click', function () {
-                                        Ext.create('App.Emailer')._emailer(xData1, xData2, xData3);
+                                        Ext.create('Emailer')._emailer();
                                     });
                                 },
                                 scope: this
@@ -725,6 +586,120 @@
     constructor: function (config) {
         this.initConfig(config);
     },
+});
+Ext.define('Emailer', {
+    _emailer: function () {
+        var string, subject;
+        subject = Ext.create('App.Information').pEmailSupportMessage;
+        string = '\r\n';
+        string += '\r\n';
+        string += '\r\n';
+        string += Ext.create('App.Information').pEmailerMessage;
+        string += '\r\n';
+        string += Ext.create('Telemetry')._this_Application_Details('email');
+        string += Ext.create('Telemetry')._user_Vars();
+        string += Ext.create('Telemetry')._user_Rally_Vars("a", "b", "c");
+        console.log(string);
+        string = encodeURIComponent(string);
+        window.location = 'mailto:' + Ext.create('App.Information').pEmailSupportAddress + '?subject=' + subject + '&body=' + string;
+    },
+});
+Ext.define('Telemetry', {
+
+        // Created by Richard Cook ::: Cookra Limited
+    // Barclaycard richard.cook@barclaycard.co.uk
+    // v4.8
+    // Updated 2017-03-08
+    _this_Application_Details: function (type) {
+        var Output;
+        var a = [];
+        a.push('> - - - - - - - - - - < Application Details');
+        a.push('> App Name : ' + Ext.create('App.Information').pAppName);
+        a.push('> App Version : ' + Ext.create('App.Information').pAppVers);
+        a.push('> App Version Status : ' + Ext.create('App.Information').pAppStat);
+        a.push('> App Designer : ' + Ext.create('App.Information').pAppOwne);
+        a.push('> App Description : ' + Ext.create('App.Information').pAppDesc);
+        a.push('> App Release Date : ' + Ext.create('App.Information').pAppDate);
+        if(type==='email'){
+            output = Ext.create('Tools')._common_Array_Outputter(a);
+        }else if(type==='inapp'){
+            output = a;
+        }
+        return output;
+    },
+    _this_Application_Output: function (array) {
+        var a = [];
+        console.log('xxx ',array);
+        a.push('> - - - - - - - - - - < Application Output');
+        for (var i = 0; i < array.length; i++) {
+            a.push('> FormattedID : ' + array[i].raw.FormattedID + ' Name : ' + array[i].raw.Name + ' _Ref : ' + array[i].raw._ref);
+        }
+        array = undefined;
+        return Ext.create('Tools')._common_Array_Outputter(a);
+    },
+    _user_Vars: function () {
+        var a = [];
+        a.push('> - - - - - - - - - - < Local Details');
+        a.push('> Browser Web App Name : ' + navigator.appName);
+        a.push('> Browser User Agent : ' + navigator.userAgent);
+        a.push('> Browser Version : ' + navigator.appVersion);
+        a.push('> Browser Code Name : ' + navigator.appCodeName);
+        a.push('> Platform : ' + navigator.platform);
+        a.push('> OS CPU : ' + navigator.oscpu);
+        a.push('> Cookies : ' + navigator.cookieEnabled);
+        a.push('> Outer Width : ' + window.outerWidth);
+        a.push('> Outer Height : ' + window.outerHeight);
+        a.push('> Inner Width : ' + window.innerWidth);
+        a.push('> Inner Height : ' + window.innerHeight);
+        a.push('> Base URI : ' + document.getElementsByTagName('script')[0].baseURI);
+        a.push('> SRC : ' + document.getElementsByTagName('script')[0].src);
+        a.push('> LocalName : ' + document.getElementsByTagName('script')[0].localName);
+        a.push('> Type : ' + document.getElementsByTagName('script')[0].type);
+        return Ext.create('Tools')._common_Array_Outputter(a);
+    },
+    _user_Rally_Vars: function (context_User, context_Project, context_Workspace) {
+        var a = [];
+        a.push('> - - - - - - - - - - < User Details');
+        a.push('> AC User Username : ' + 'test');//context_User.UserName);
+        a.push('> AC User Name : ' + 'test');// context_User._refObjectName);
+        a.push('> AC User Role : ' + 'test');// context_User.Role);
+        a.push('> AC Application Launched From Node : ' + 'test');// context_Project._refObjectName);
+        a.push('> AC Application Workspace Name : ' + 'test');// context_Workspace._refObjectName);
+        a.push('> AC Application Workspace Date/Time Format : ' + 'test');// context_Workspace.WorkspaceConfiguration.DateFormat);
+        return Ext.create('Tools')._common_Array_Outputter(a);
+    }
+})
+Ext.define('Tools', {
+    _shadeBlendConvert: function (color, percent) {
+        var R = parseInt(color.substring(1, 3), 16);
+        var G = parseInt(color.substring(3, 5), 16);
+        var B = parseInt(color.substring(5, 7), 16);
+        R = parseInt(R * (100 + percent) / 100);
+        G = parseInt(G * (100 + percent) / 100);
+        B = parseInt(B * (100 + percent) / 100);
+        R = (R < 255) ? R : 255;
+        G = (G < 255) ? G : 255;
+        B = (B < 255) ? B : 255;
+        var RR = ((R.toString(16).length === 1) ? "0" + R.toString(16) : R.toString(16));
+        var GG = ((G.toString(16).length === 1) ? "0" + G.toString(16) : G.toString(16));
+        var BB = ((B.toString(16).length === 1) ? "0" + B.toString(16) : B.toString(16));
+        return "#" + RR + GG + BB;
+    },
+    _common_Array_Outputter: function (array) {
+        var character_Return = '\r\n';
+        var l = array.length;
+        var output = '';
+        var padSize = String(l).length;
+        for (var x = 0; x < l; x++) {
+            output += '[#' + this._number_Pad(x, padSize) + '] ' + array[x] + character_Return;
+        }        
+        console.log(output);
+        array = undefined;
+        return output;
+    },
+    _number_Pad: function (num, size) {
+        return Array(Math.max(size - String(num).length + 1, 0)).join(0) + num;
+    }
 });
                 (function () {
     var Ext = window.Ext4 || window.Ext;

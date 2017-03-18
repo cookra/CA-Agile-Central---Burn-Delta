@@ -41,7 +41,7 @@ Ext.define('App.Information', {
     _generate_Tabs: function () {
         var arrayMyColours = this.PmyColours;
         var arrayBaColours = this.PbarclaysColours_5;
-        var application_vr = Ext.create('App.System')._this_Application_Details('inapp');
+        var application_vr = Ext.create('Telemetry')._this_Application_Details('inapp');
         var config = [{
             panel_height: 160,
             panel_paddin: 10,
