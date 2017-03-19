@@ -10,7 +10,7 @@
             return {
                 xtype: "rallychart",
                 itemId: "burndownchart",
-
+                animate: true,
                 aggregationErrorMessage: "No data to display. Check the data type setting for displaying data based on count versus plan estimate.",
 
                 storeType: "Rally.data.lookback.SnapshotStore",

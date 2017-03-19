@@ -5,7 +5,7 @@ Ext.define('App.Information', {
         pP_AppStatus: 'beta',
         pP_AppliName: 'AC Burn Delta',
         pP_AppliDesc: 'Measures the Delta between users stories in To Do & Accepted',
-        pP_AppliOwne: 'Richard Cook',
+        pP_AppliOwne: 'Richard Cook (Barclaycard LPM PMC)',
         pP_AppliDate: '2017-03-18: 11:47 GMT',
         // Git Repo Details
         pP_AppliRepo: 'not shared',
@@ -19,13 +19,20 @@ Ext.define('App.Information', {
         pA_ACColours: ['#0096DB', '#004A9D', '#FF3C00', '#FF8D00', '#FFDC00', '#6F7376', 'white', '#FF0069', '#41006E', '#00710C'],
         // Barclays Corporate Colours
         pA_BCColours: ['#145FAC', '#437EA0', '#00AEEF', 'white', '#FFA000'],
-        pA_MyColours: ['#d61551', '#c9506f', '#6a0b7', '#0e1026', '#e53118', '#262428', '#c9d940', '#d3272b', '#ea2b30', '#59595b', '#242021', '#ebe7e4', '#437EA0'],
+        pA_MyColours: ['#d61551', '#c9506f', '#6a0b7', '#0e1026', '#e53118', '#262428', '#c9d940', '#d3272b', '#ea2b30', '#59595b', '#242021', '#ebe7e4', '#437EA0', '#41006E'],
     },
     _writePanelContent: function (whatAmI) {
         var content, output;
         spacerWidth = '20px';
         headerBorder = 'border-bottom: 4px solid dimgrey';
+        if (whatAmI === 'tools') {
+            output = [
+                [{ margin: '0px', padding: '10px', color: 'black', background: '#eeeeee', type: 'header', width: '100%', height: '100%', fontWeight: 'bold', fontSize: '18px', txt: 'Tools' }],
+                [{ margin: '0px', padding: '10px', color: 'black', background: '#eeeeee', type: 'contex', width: '100%', height: '100%', fontWeight: 'normal', fontSize: '12px', txt: 'If you require support for this application. please use the \'Contact Support\' button above.' }],
+            ];
+        }
         if (whatAmI === 'about') {
+            // Left as 3d array to support future updates
             output = [
                 [{margin:'0px',padding:'10px',color:'black',background:'#eeeeee',type:'header',width:'40%',height:'100%',fontWeight: 'bold',fontSize: '18px',txt:'About'}],
                 [{margin:'0px',padding:'10px',color:'black',background:'#eeeeee',type:'contex',width:'40%',height:'100%',fontWeight: 'normal',fontSize: '12px',txt:'Displays the Burn delta between remaining and accepted user stories'}],
@@ -37,19 +44,37 @@ Ext.define('App.Information', {
                 [{margin:'0px',padding:'10px',color:'black',background:'white',type:'contex',width:'20%',height:'100%',fontWeight: 'normal',fontSize: '14px',txt:'<li>Area</li><li>Column</li><li>Line</li><li>Split</li>'}],
               ];
         }
-    if (whatAmI === 'usage') {
+        if (whatAmI === 'usage') {
             output = [
-                [{margin:'0px',padding:'10px',color:'black',background:'#eeeeee',type:'header',width:'40%',height:'100%',fontWeight: 'bold',fontSize: '18px',txt:'About'}],
-                [{margin:'0px',padding:'10px',color:'black',background:'#eeeeee',type:'contex',width:'40%',height:'100%',fontWeight: 'normal',fontSize: '12px',txt:'Displays the Burn delta between remaining and accepted user stories'}],
-                [{margin:'0px',padding:'10px',color:'black',background:'white',type:'header',width:'20%',height:'100%',fontWeight: 'bold',fontSize: '18px',txt:'Configuration'}],
-                [{margin:'0px',padding:'10px',color:'black',background:'white',type:'contex',width:'20%',height:'100%',fontWeight: 'normal',fontSize: '14px',txt:''}],
-                [{margin:'0px',padding:'10px',color:'black',background:'white',type:'header',width:'20%',height:'100%',fontWeight: 'bold',fontSize: '18px',txt:'Data Types'}],
-                [{margin:'0px',padding:'10px',color:'black',background:'white',type:'contex',width:'20%',height:'100%',fontWeight: 'normal',fontSize: '14px',txt:'<li>Planned Estimate</li><li>User Story Count</li>'}],
-                [{margin:'0px',padding:'10px',color:'black',background:'white',type:'header',width:'20%',height:'100%',fontWeight: 'bold',fontSize: '18px',txt:'Chart Type'}],
-                [{margin:'0px',padding:'10px',color:'black',background:'white',type:'contex',width:'20%',height:'100%',fontWeight: 'normal',fontSize: '14px',txt:'<li>Area</li><li>Column</li><li>Line</li><li>Split</li>'}],
-              ];
+                [{ margin: '0px', padding: '10px', color: 'black', background: '#eeeeee', type: 'header', width: '40%', height: '100%', fontWeight: 'bold', fontSize: '18px', txt: 'Usage' }],
+                [{ margin: '0px', padding: '10px', color: 'black', background: '#eeeeee', type: 'contex', width: '40%', height: '100%', fontWeight: 'normal', fontSize: '12px', txt: 'This application can be used as a standalone page or as a custom app within a dashboard.' }],
+                [{ margin: '0px', padding: '10px', color: 'black', background: 'white', type: 'header', width: '20%', height: '100%', fontWeight: 'bold', fontSize: '18px', txt: 'Deployment > > >' }],
+                [{ margin: '0px', padding: '10px', color: 'black', background: 'white', type: 'contex', width: '20%', height: '100%', fontWeight: 'normal', fontSize: '14px', txt: '' }],
+                [{ margin: '0px', padding: '10px', color: 'black', background: 'white', type: 'header', width: '20%', height: '100%', fontWeight: 'bold', fontSize: '18px', txt: '(A) Standalone' }],
+                [{ margin: '0px', padding: '10px', color: 'black', background: 'white', type: 'contex', width: '20%', height: '100%', fontWeight: 'normal', fontSize: '14px', txt: '(1) Use application settings (2) Copy the source code and place into a new page (3) Set page filter to Iteration (4) Set page layout to single column (5) Add Custom HTML app (6) Use application settings to customise the chart'}],
+                [{ margin: '0px', padding: '10px', color: 'black', background: 'white', type: 'header', width: '20%', height: '100%', fontWeight: 'bold', fontSize: '18px', txt: '(B) Custom App' }],
+                [{ margin: '0px', padding: '10px', color: 'black', background: 'white', type: 'contex', width: '20%', height: '100%', fontWeight: 'normal', fontSize: '14px', txt: '(1) Use application settings (2) Copy the source code and place into a new Custom HTML app (3) Use application settings to customise the chart'}],
+            ];
         }
-        return this._divGenerator(output,spacerWidth,headerBorder);
+        if (whatAmI === 'version') {
+            output = [
+                [{margin:'0px',padding:'10px',color:'black',background:'#eeeeee',type:'header',width:'40%',height:'100%',fontWeight: 'bold',fontSize: '18px',txt:'Version'}],
+                [{margin:'0px',padding:'10px',color:'black',background:'#eeeeee',type:'contex',width:'40%',height:'100%',fontWeight: 'normal',fontSize: '12px',txt:this.pP_AppVersi}],
+                [{margin:'0px',padding:'10px',color:'black',background:'white',type:'header',width:'20%',height:'100%',fontWeight: 'bold',fontSize: '18px',txt:'Status'}],
+                [{margin:'0px',padding:'10px',color:'black',background:'white',type:'contex',width:'20%',height:'100%',fontWeight: 'normal',fontSize: '14px',txt:this.pP_AppStatus}],
+                [{margin:'0px',padding:'10px',color:'black',background:'white',type:'header',width:'20%',height:'100%',fontWeight: 'bold',fontSize: '18px',txt:'Build Date'}],
+                [{margin:'0px',padding:'10px',color:'black',background:'white',type:'contex',width:'20%',height:'100%',fontWeight: 'normal',fontSize: '14px',txt:this.pP_AppliDate}],
+                [{margin:'0px',padding:'10px',color:'black',background:'white',type:'header',width:'20%',height:'100%',fontWeight: 'bold',fontSize: '18px',txt:'Owner'}],
+                [{margin:'0px',padding:'10px',color:'black',background:'white',type:'contex',width:'20%',height:'100%',fontWeight: 'normal',fontSize: '14px',txt:this.pP_AppliOwne}],
+            ];
+        }
+        if (whatAmI === 'support') {
+            output = [
+                [{ margin: '0px', padding: '10px', color: 'black', background: '#eeeeee', type: 'header', width: '100%', height: '100%', fontWeight: 'bold', fontSize: '18px', txt: 'Support' }],
+                [{ margin: '0px', padding: '10px', color: 'black', background: '#eeeeee', type: 'contex', width: '100%', height: '100%', fontWeight: 'normal', fontSize: '12px', txt: 'If you require support for this application. please use the \'Contact Support\' button above.' }],
+            ];
+        }
+        return this._divGenerator(output, spacerWidth, headerBorder);
     },
     _generate_Tabs: function () {
         var pA_MyColours = this.pA_MyColours;
@@ -59,22 +84,31 @@ Ext.define('App.Information', {
             panel_height: 160,
             panel_paddin: 10,
             panel_font_s: 15,
-            panel_one_tx: this._writePanelContent('about'),
-            panel_one_tc: pA_MyColours[11],
-            panel_one_sc: this._stripecolorGenerator([{base_color:pA_MyColours[11],stripe_angle:45,blend:20}]),
-            panel_two_tx: this._writePanelContent('usage'),
-            panel_two_tc: pA_MyColours[11],
-            panel_two_sc: this._stripecolorGenerator([{base_color:pA_MyColours[11],stripe_angle:45,blend:20}]),
-            panel_thr_tx: this._writePanelContent('usage'),
-            panel_thr_tc: pA_MyColours[11],
-            panel_thr_sc: this._stripecolorGenerator([{base_color:pA_MyColours[11],stripe_angle:45,blend:20}]),
-            panel_sup_tx: this._writePanelContent('usage'),
-            panel_sup_tc: pA_MyColours[11],
-            panel_sup_sc: this._stripecolorGenerator([{base_color:pA_MyColours[11],stripe_angle:45,blend:20}]),
-            butto_height: 25,
-            butto_color: 'red',
+            panel_tools_tx: this._writePanelContent('tools'),
+            panel_tools_tc: pA_MyColours[11],
+            panel_tools_sc: this._stripecolorGenerator([{base_color:pA_MyColours[0],stripe_angle:45,blend:20}]),
+            panel_about_tx: this._writePanelContent('about'),
+            panel_about_tc: pA_MyColours[11],
+            panel_about_sc: this._stripecolorGenerator([{base_color:pA_MyColours[13],stripe_angle:45,blend:20}]),
+            panel_usage_tx: this._writePanelContent('usage'),
+            panel_usage_tc: pA_MyColours[11],
+            panel_usage_sc: this._stripecolorGenerator([{base_color:pA_MyColours[6],stripe_angle:45,blend:20}]),
+            panel_version_tx: this._writePanelContent('version'),
+            panel_version_tc: pA_MyColours[11],
+            panel_version_sc: this._stripecolorGenerator([{base_color:pA_MyColours[9],stripe_angle:45,blend:20}]),
+            panel_support_tx: this._writePanelContent('support'),
+            panel_support_tc: pA_MyColours[11],
+            panel_support_sc: this._stripecolorGenerator([{base_color:pA_MyColours[12],stripe_angle:45,blend:20}]),
+            button_height: 25,
+            button_support: pA_MyColours[8],
+            button_print: pA_MyColours[6],
+            button_excel: pA_MyColours[6],
+            button_a_pdf: pA_MyColours[6],
+            button_support_txt: pA_MyColours[3],
+            button_print_txt: pA_MyColours[3],
+            button_excel_txt: pA_MyColours[3],
+            button_a_pdf_txt: pA_MyColours[3],
         }];
-
         // Build Details Container
         return this._panelGenerator(config);
     },
@@ -85,6 +119,8 @@ Ext.define('App.Information', {
     _panelGenerator: function (a){
         var container = Ext.create('Ext.container.Container', {
             xtype: 'Viewport',
+            id: 'myViewport',
+            
             items: [{
                 region: 'north',
                 items: [{
@@ -92,108 +128,143 @@ Ext.define('App.Information', {
                     width: '100%',
                     collapsible: true,
                     items: [{
-                        title: 'About',
+                        title: 'Tools',
                         width: '100%',
-                        html: a[0].panel_one_tx,
-                        height: a[0].panel_height,
-                        bodyStyle: a[0].panel_one_sc + 'font-size:' + a[0].panel_font_s + 'px;padding:' + a[0].panel_paddin + 'px;',
+                        bodyStyle: a[0].panel_tools_sc + 'font-size:' + a[0].panel_font_s + 'px;padding:' + a[0].panel_paddin + 'px;',
                         cls: 'fixTabMargins',
                         tabConfig: {
                             style: {
-                                background: a[0].panel_one_tc,
+                                background: a[0].panel_tools_tc,
                             }
                         },
+                        items: [{
+                            xtype: 'component',
+                            html: a[0].panel_tools_tx,
+                        },{
+                            xtype: 'button',
+                            text: 'Print Lanscape',
+                            height: a[0].button_height,
+                            cls: 'black_button_text_color',
+                            style: {
+                                background: a[0].button_print,
+                                margin: '0px 10px 0px 0px',
+                            },
+                            listeners: {
+                                afterrender: function (v) {
+                                    v.el.on('click', function () {
+                                        Ext.create('Export')._print('myChart',1);
+                                    });
+                                },
+                                scope: this
+                            },
+                        }, {
+                            xtype: 'button',
+                            text: 'Print Portrait',
+                            height: a[0].button_height,
+                            cls: 'black_button_text_color',
+                            style: {
+                                background: a[0].button_print,
+                                margin: '0px 10px 0px 0px',
+                            },
+                            listeners: {
+                                afterrender: function (v) {
+                                    v.el.on('click', function () {
+                                        Ext.create('Export')._print('myChart',2);
+                                    });
+                                },
+                                scope: this
+                            },
+                        }
                         /*
-                        buttons: [{
-                            text: 'Button 1'
-                        }]
-                        */
+                        
+                        , {
+                                xtype: 'button',
+                                text: 'Excel',
+                                height: a[0].button_height,
+                                cls: 'black_button_text_color',
+                                style: {
+                                    background: a[0].button_excel,
+                                    margin: '0px 10px 0px 0px',
+                                },
+                                listeners: {
+                                    afterrender: function (v) {
+                                        v.el.on('click', function () {
+                                            Ext.create('Export')._print('myChart');
+                                        });
+                                    },
+                                    scope: this
+                                },
+                            }, {
+                                xtype: 'button',
+                                text: 'Adobe PDF',
+                                cls: 'black_button_text_color',
+                                height: a[0].button_height,
+                                style: {
+                                    background: a[0].button_a_pdf,
+                                    margin: '0px 10px 0px 0px',
+                                },
+                                listeners: {
+                                    afterrender: function (v) {
+                                        v.el.on('click', function () {
+                                            Ext.create('Export')._pdf('myChart');
+                                        });
+                                    },
+                                    scope: this
+                                }
+                            }*/]
+                    }, {
+                        title: 'About',
+                        width: '100%',
+                        html: a[0].panel_about_tx,
+                        bodyStyle: a[0].panel_about_sc + 'font-size:' + a[0].panel_font_s + 'px;padding:' + a[0].panel_paddin + 'px;',
+                        cls: 'fixTabMargins',
+                        tabConfig: {
+                            style: {
+                                background: a[0].panel_about_tc,
+                            }
+                        },
                     }, {
                         title: 'Usage',
                         width: '100%',
-                        html: a[0].panel_two_tx,
-                        height: a[0].panel_height,
-                        bodyStyle: a[0].panel_two_sc + 'font-size:' + a[0].panel_font_s + 'px;padding:' + a[0].panel_paddin + 'px;',
+                        html: a[0].panel_usage_tx,
+                        bodyStyle: a[0].panel_usage_sc + 'font-size:' + a[0].panel_font_s + 'px;padding:' + a[0].panel_paddin + 'px;',
                         cls: 'fixTabMargins',
                         tabConfig: {
                             style: {
-                                background: a[0].panel_two_tc,
+                                background: a[0].panel_usage_tc,
                             }
                         },
                     }, {
                         title: 'Version',
                         width: '100%',
-                        html: a[0].panel_thr_tx,
-                        height: a[0].panel_height,
-                        bodyStyle: a[0].panel_thr_sc + 'font-size:' + a[0].panel_font_s + 'px;padding:' + a[0].panel_paddin + 'px;',
+                        html: a[0].panel_version_tx,
+                        bodyStyle: a[0].panel_version_sc + 'font-size:' + a[0].panel_font_s + 'px;padding:' + a[0].panel_paddin + 'px;',
                         cls: 'fixTabMargins',
                         tabConfig: {
                             style: {
-                                background: a[0].panel_thr_tc,
+                                background: a[0].panel_version_tc,
                             }
                         },
-                    }, {
-                        title: 'Tools',
-                        width: '100%',
-                        html: a[0].panel_sup_tx,
-                        height: a[0].panel_height,
-                        bodyStyle: a[0].panel_sup_sc + 'font-size:' + a[0].panel_font_s + 'px;padding:' + a[0].panel_paddin + 'px;',
-                        cls: 'fixTabMargins',
-                        tabConfig: {
-                            style: {
-                                background: a[0].panel_sup_tc,
-                            }
-                        },
-                        items: [{
-                            xtype: 'button',
-                            text: 'Export PDF',
-                            height: a[0].butto_height,
-                            style: {
-                                background: a[0].butto_color,
-                            },
-                            listeners: {
-                                afterrender: function (v) {
-                                    v.el.on('click', function () {
-                                        Ext.create('Export')._pdf(this.burndownchart);
-                                    });
-                                },
-                                scope: this
-                            }
-                        
-                            },{
-                            xtype: 'button',
-                            text: 'Print',
-                            height: a[0].butto_height,
-                            style: {
-                                background: a[0].butto_color,
-                            },
-                            listeners: {
-                                afterrender: function (v) {
-                                    v.el.on('click', function () {
-                                        Ext.create('Export')._print('myChart');
-                                    });
-                                },
-                                scope: this
-                            },
-                        }]
-                    }, {
+                    },{
                         title: 'Support',
                         width: '100%',
-                        html: a[0].panel_sup_tx,
-                        height: a[0].panel_height,
-                        bodyStyle: a[0].panel_sup_sc + 'font-size:' + a[0].panel_font_s + 'px;padding:' + a[0].panel_paddin + 'px;',
+                        bodyStyle: a[0].panel_support_sc + 'font-size:' + a[0].panel_font_s + 'px;padding:' + a[0].panel_paddin + 'px;',
                         cls: 'fixTabMargins',
                         tabConfig: {
                             style: {
-                                background: a[0].panel_sup_tc,
+                                background: a[0].panel_support_tc,
                             }
                         },
                         items: [{
+                            xtype: 'component',
+                            html: a[0].panel_support_tx,
+                        }, {
                             xtype: 'button',
                             text: 'Contact Support',
-                            height: a[0].butto_height,
+                            height: a[0].button_height,
                             style: {
-                                background: a[0].butto_color,
+                                background: a[0].button_support,
+                                margin: '0px 10px 0px 0px',
                             },
                             listeners: {
                                 afterrender: function (v) {
@@ -203,7 +274,7 @@ Ext.define('App.Information', {
                                 },
                                 scope: this
                             },
-                        }]
+                        }],
                     }]
                 }]
             }]
@@ -274,9 +345,9 @@ Ext.define('Emailer', {
         o += Ext.create('Telemetry')._this_Application_Details();
         o += Ext.create('Telemetry')._user_Vars();
         o += Ext.create('Telemetry')._user_Rally_Vars("a", "b", "c"); // <------- NEED THESE SCOPED
-        s = encodeURIComponent(o);
-        o = undefined;
-        window.location = 'mailto:' + Ext.create('App.Information').pP_EmailAddr + '?subject=' + s + '&body=' + o;
+        o = encodeURIComponent(o);
+        // window.top.location MUST be used for HTTPS transfer out of browser //
+        window.top.location = 'mailto:' + Ext.create('App.Information').pP_EmailAddr + '?subject=' + s + '&body=' + o;
     },
 });
 Ext.define('Telemetry', {
@@ -365,9 +436,17 @@ Ext.define('Tools', {
     }
 });
 Ext.define('Export', {
-    _print: function (myChart) {
+    _print: function (myChart,ori) {
         var mywindow = window.open('', 'Printing '+Ext.create('App.Information').pP_AppliName, 'height=800,width=1000');
-        printCss = '<style type="text/css" media="print">@page { size: landscape; }</style>';
+        if(ori===1){
+        console.log(ori);
+            printCss = '<style type="text/css" media="print">@page { size: landscape; }</style>';
+        }
+        if(ori===2){
+        console.log(ori);
+            printCss = '<style type="text/css"></style>';
+        }
+        console.log('css ',printCss);
         mywindow.document.write('<html><head><title>Printing '+Ext.create('App.Information').pP_AppliName+'</title>');
         mywindow.document.write(printCss);
         mywindow.document.write('</head><body >');
@@ -379,14 +458,22 @@ Ext.define('Export', {
         mywindow.close();
         return true;
     },
-    _pdf: function (output) {
-        var doc = new jsPDF({
-            orientation: 'landscape',
-            unit: 'in',
-            format: [4, 2]
-        });
+    _pdf: function (id, test) {
+        test = 'test';
+        id = 'myViewport';
+    var canvasElement = document.getElementById(id);
 
-        doc.text(id = "x-cmp-1009-innerCt", 10, 10);
-        doc.save('two-by-four.pdf');
+    var MIME_TYPE = "image/png";
+
+    var imgURL = canvasElement.toDataURL(MIME_TYPE);
+
+    var dlLink = document.createElement('a');
+    dlLink.download = fileName;
+    dlLink.href = imgURL;
+    dlLink.dataset.downloadurl = [MIME_TYPE, dlLink.download, dlLink.href].join(':');
+
+    document.body.appendChild(dlLink);
+    dlLink.click();
+    document.body.removeChild(dlLink);
     }
 });

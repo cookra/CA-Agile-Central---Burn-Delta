@@ -65,7 +65,7 @@ ul, ol {
 /* Divs */
 /* About */
 .divTable {
-    margin:5px 0;
+    margin:5px 0px 10px 0px;
     display: table;
     width: 100%;
 }
@@ -94,4 +94,12 @@ ul, ol {
 }
 .contentBg1 {
     background: white;
+}
+/* Buttons */
+.print_button_over{
+    background-color: white;
+}
+.black_button_text_color .x-btn-inner{
+    color: black !important;
+    font-weight: bold;
 }
