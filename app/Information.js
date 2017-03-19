@@ -13,6 +13,8 @@ Ext.define('App.Information', {
         pP_EmailAddr: 'richard.cook@barclaycard.co.uk',
         pP_EmailSubj: '*** [AC AC Burn Delta] Custom Application AC Support Request',
         pP_EmailBody: '========== Please add your comments above this line ==========',
+        // Printing printCss
+        pP_Print_Css: 'x',
         // Agile Central Internal colors
         pA_ACColours: ['#0096DB', '#004A9D', '#FF3C00', '#FF8D00', '#FFDC00', '#6F7376', 'white', '#FF0069', '#41006E', '#00710C'],
         // Barclays Corporate Colours
@@ -131,6 +133,50 @@ Ext.define('App.Information', {
                             }
                         },
                     }, {
+                        title: 'Tools',
+                        width: '100%',
+                        html: a[0].panel_sup_tx,
+                        height: a[0].panel_height,
+                        bodyStyle: a[0].panel_sup_sc + 'font-size:' + a[0].panel_font_s + 'px;padding:' + a[0].panel_paddin + 'px;',
+                        cls: 'fixTabMargins',
+                        tabConfig: {
+                            style: {
+                                background: a[0].panel_sup_tc,
+                            }
+                        },
+                        items: [{
+                            xtype: 'button',
+                            text: 'Export PDF',
+                            height: a[0].butto_height,
+                            style: {
+                                background: a[0].butto_color,
+                            },
+                            listeners: {
+                                afterrender: function (v) {
+                                    v.el.on('click', function () {
+                                        Ext.create('Export')._pdf(this.burndownchart);
+                                    });
+                                },
+                                scope: this
+                            }
+                        
+                            },{
+                            xtype: 'button',
+                            text: 'Print',
+                            height: a[0].butto_height,
+                            style: {
+                                background: a[0].butto_color,
+                            },
+                            listeners: {
+                                afterrender: function (v) {
+                                    v.el.on('click', function () {
+                                        Ext.create('Export')._print('myChart');
+                                    });
+                                },
+                                scope: this
+                            },
+                        }]
+                    }, {
                         title: 'Support',
                         width: '100%',
                         html: a[0].panel_sup_tx,
@@ -208,6 +254,7 @@ Ext.define('App.Information', {
             o+= 'width:'+a.width+';height:'+a.height+';padding:'+a.padding+';margin:'+a.margin+';'+border+';';
             o+= 'background:'+a.background+';color:'+a.color+';"';
             o = '<div '+o+'>' + a.txt + '</div>';
+            
         }
         a = undefined;
         return o;
@@ -315,5 +362,31 @@ Ext.define('Tools', {
     },
     _number_Pad: function (num, size) {
         return Array(Math.max(size - String(num).length + 1, 0)).join(0) + num;
+    }
+});
+Ext.define('Export', {
+    _print: function (myChart) {
+        var mywindow = window.open('', 'Printing '+Ext.create('App.Information').pP_AppliName, 'height=800,width=1000');
+        printCss = '<style type="text/css" media="print">@page { size: landscape; }</style>';
+        mywindow.document.write('<html><head><title>Printing '+Ext.create('App.Information').pP_AppliName+'</title>');
+        mywindow.document.write(printCss);
+        mywindow.document.write('</head><body >');
+        mywindow.document.write(document.getElementById(myChart).innerHTML);
+        mywindow.document.write('</body></html>');
+        mywindow.document.close(); // necessary for IE >= 10
+        mywindow.focus(); // necessary for IE >= 10*/
+        mywindow.print();
+        mywindow.close();
+        return true;
+    },
+    _pdf: function (output) {
+        var doc = new jsPDF({
+            orientation: 'landscape',
+            unit: 'in',
+            format: [4, 2]
+        });
+
+        doc.text(id = "x-cmp-1009-innerCt", 10, 10);
+        doc.save('two-by-four.pdf');
     }
 });

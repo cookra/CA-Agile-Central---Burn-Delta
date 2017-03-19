@@ -5,6 +5,7 @@
     "sdk": "2.1",
     "javascript": [
         "../DateMixin.js",
+        "https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.3/jspdf.debug.js",
         "../IntegrationHeaders.js",
         "../settings/RadioGroupSetting.js",
         "../settings/ChartDisplayTypePicker.js",

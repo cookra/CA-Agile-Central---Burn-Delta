@@ -58,6 +58,7 @@
             }
         },
         launch: function () {
+
             this._buildLayout();
             if (this._settingsInvalid()) {
                 this.fireEvent('settingsneeded', this);
@@ -65,14 +66,12 @@
             }
             this.customScheduleStates = null;
             this.chartComponentConfig = Ext.create('Rally.apps.charts.burndown.BurnDownChart', this).defaultChartComponentConfig();
-
             Ext.create('Rally.apps.charts.IntegrationHeaders', this).applyTo(this.chartComponentConfig.storeConfig);
-
+            console.log(this,'xxx');
             this._addHelpComponent();
             this._loadUserStoryModel();
             this._saveScopeType();
             this.callParent(arguments);
-
             if (!this.isOnScopedDashboard()) {
                 this.ignoreOnScopeChange = true;
                 this._getScopePicker().on('ready', this._loadScopePreference, this, {
@@ -230,6 +229,7 @@
 
         _addChartWithIterationLines: function () {
             this._addChart();
+            console.log('here');
             this.down('rallychart').on('snapshotsAggregated', this._addIterationLines, this);
         },
 

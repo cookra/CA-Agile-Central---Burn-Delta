@@ -10,6 +10,7 @@
             return {
                 xtype: "rallychart",
                 itemId: "burndownchart",
+
                 aggregationErrorMessage: "No data to display. Check the data type setting for displaying data based on count versus plan estimate.",
 
                 storeType: "Rally.data.lookback.SnapshotStore",
@@ -39,8 +40,8 @@
                 },
                 chartColors: ["#7cc6f4", "#dee255", "#666666", "#c0c0c0"],
                 cls: 'myCustom',
+                id: 'myChart',
                 overCls: 'myOver',
-
                 chartConfig: {
                     chart: {
                         zoomType: "xy",
