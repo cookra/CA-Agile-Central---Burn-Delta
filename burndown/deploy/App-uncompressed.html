@@ -1573,7 +1573,7 @@ Ext.define('Tools', {
         _getScheduleStateValues: function (model) {
             var scheduleStates = model.getField('ScheduleState').getAllowedStringValues();
 
-            this.customScheduleStates = scheduleStates.slice(scheduleStates.indexOf('Completed'), scheduleStates.length);
+            this.customScheduleStates = scheduleStates.slice(scheduleStates.indexOf('Accepted'), scheduleStates.length);
 
             if (this.deferredAddChart) {
                 this.deferredAddChart.call(this);
@@ -1653,11 +1653,6 @@ Ext.define('Tools', {
                 {
                     "field": "AcceptedPoints",
                     "as": "Accepted",
-                    "f": "sum"
-                },
-                {
-                    "field": "CompletedPoints",
-                    "as": "Completed",
                     "f": "sum"
                 }
             ];

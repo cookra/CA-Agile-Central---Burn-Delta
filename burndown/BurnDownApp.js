@@ -710,7 +710,7 @@
         _getScheduleStateValues: function (model) {
             var scheduleStates = model.getField('ScheduleState').getAllowedStringValues();
 
-            this.customScheduleStates = scheduleStates.slice(scheduleStates.indexOf('Completed'), scheduleStates.length);
+            this.customScheduleStates = scheduleStates.slice(scheduleStates.indexOf('Accepted'), scheduleStates.length);
 
             if (this.deferredAddChart) {
                 this.deferredAddChart.call(this);

@@ -71,11 +71,6 @@
                     "field": "AcceptedPoints",
                     "as": "Accepted",
                     "f": "sum"
-                },
-                {
-                    "field": "CompletedPoints",
-                    "as": "Completed",
-                    "f": "sum"
                 }
             ];
         },
