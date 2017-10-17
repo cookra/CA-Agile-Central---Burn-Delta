@@ -1,0 +1,26 @@
+{
+    "name": "Burndown",
+    "className": "Rally.apps.charts.burndown.ReleaseBurnDownApp",
+    "server": "https://rally1.rallydev.com",
+    "sdk": "2.1",
+    "javascript": [
+        "DateMixin.js",
+        "https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.3/jspdf.debug.js",
+        "IntegrationHeaders.js",
+        "settings/RadioGroupSetting.js",
+        "settings/ChartDisplayTypePicker.js",
+        "settings/SettingsChangeMixin.js",
+        "settings/DataTypePicker.js",
+        "settings/TimeboxPicker.js",
+        "app/Information.js",
+        "burndown/BurnDownSettings.js",
+        "burndown/BurnDownChart.js",
+        "burndown/BurnDownApp.js",
+        "burndown/BurnDownCalculator.js",
+        "burndown/ReleaseBurnDownApp.js"
+    ],
+    "css": [
+        "Charts.less",
+        "App.css"
+    ]
+}
